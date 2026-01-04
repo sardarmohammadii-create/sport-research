@@ -3,199 +3,116 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>پژوهش رفتار هواداری در ورزش</title>
+    <!-- تنظیمات واتس‌اپ و تلگرام -->
+    <meta property="og:title" content="پژوهش رفتار هواداری در ورزش">
+    <meta property="og:description" content="لطفاً ۳۰ ثانیه زمان بگذارید و در این نظرسنجی شرکت کنید.">
+    <meta property="og:image" content="https://sardarmohammadii-create.github.io/sport-research/shirt.jpg">
     
-    <!-- تنظیمات نمایش لینک در شبکه‌های اجتماعی (اصلاح شده و نهایی) -->
-    <meta property="og:title" content="تأثیر راهبردهای ایموجی و سطح درگیری محصول بر اثربخشی تبلیغات ورزشی" />
-    <meta property="og:description" content="با سلام، لطفاً ۳۰ ثانیه زمان بگذارید و در این پژوهش دانشگاهی شرکت کنید. نظر شما ارزشمند است." />
-    <!-- نکته: ?v=2 برای مجبور کردن واتس‌اپ به دانلود مجدد عکس است -->
-    <meta property="og:image" content="https://sardarmohammadii-create.github.io/sport-research/shirt.jpg?v=2" />
-    <meta property="og:url" content="https://sardarmohammadii-create.github.io/sport-research/" />
-    <meta property="og:type" content="article" />
-    <meta property="og:locale" content="fa_IR" />
-    <!-- پایان تنظیمات -->
-
-    <title>شبیه‌ساز پست اینستاگرام</title>
+    <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/dist/font-face.css" rel="stylesheet" type="text/css" />
     <style>
-        /* استایل‌های عمومی */
-        body { margin: 0; padding: 0; background-color: #fafafa; font-family: Tahoma, 'Segoe UI', Arial, sans-serif; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh; }
-        
-        /* باکس شروع */
-        #intro-box { background: white; padding: 30px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); max-width: 400px; text-align: center; border: 1px solid #dbdbdb; z-index: 10;}
-        #intro-box h2 { color: #262626; margin-top: 0; font-size: 18px; }
-        #intro-box p { color: #8e8e8e; line-height: 1.6; text-align: justify; font-size: 14px; margin-bottom: 20px;}
-        
-        /* دکمه */
-        .btn { background-color: #0095f6; color: white; border: none; padding: 10px 20px; border-radius: 4px; font-size: 14px; font-weight: bold; cursor: pointer; width: 100%; transition: background 0.2s; }
-        .btn:hover { background-color: #0081d6; }
-        .btn:active { opacity: 0.7; }
-
-        /* پست اینستاگرام */
-        #post-container { display: none; background: white; border: 1px solid #dbdbdb; max-width: 400px; width: 100%; border-radius: 3px; margin-top: 50px; }
+        body { margin: 0; padding: 0; font-family: 'Vazirmatn', sans-serif; background: #fafafa; display: flex; justify-content: center; align-items: center; min-height: 100vh; overflow: hidden; }
+        #welcome-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); z-index: 9999; display: flex; flex-direction: column; justify-content: center; align-items: center; color: white; text-align: center; padding: 20px; box-sizing: border-box; }
+        .btn-start { background: #0095f6; color: white; border: none; padding: 15px 40px; font-size: 1.1rem; border-radius: 8px; cursor: pointer; margin-top: 20px; font-family: inherit; font-weight: bold; }
+        .instagram-card { background: white; border: 1px solid #dbdbdb; width: 100%; max-width: 420px; display: none; flex-direction: column; border-radius: 3px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
         .header { display: flex; align-items: center; padding: 14px; border-bottom: 1px solid #efefef; }
-        .avatar { width: 32px; height: 32px; background-color: #efefef; border-radius: 50%; border: 1px solid #dbdbdb; margin-left: 10px; flex-shrink: 0; }
-        .username { font-weight: 600; font-size: 14px; color: #262626; text-align: right; width: 100%; }
-        
-        /* تصویر محصول */
-        #product-img { width: 100%; display: block; object-fit: cover; min-height: 300px; background: #fafafa; }
-        
-        /* آیکون‌ها */
-        .actions { padding: 10px 14px; display: flex; gap: 16px; direction: ltr; } 
-        .icon { width: 24px; height: 24px; display: block; background-size: contain; background-repeat: no-repeat; cursor: pointer; }
-        .icon-heart { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23262626' stroke-width='2'%3E%3Cpath d='M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z'%3E%3C/path%3E%3C/svg%3E"); }
-        .icon-comment { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23262626' stroke-width='2'%3E%3Cpath d='M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z'%3E%3C/path%3E%3C/svg%3E"); transform: rotateY(180deg); }
-        .icon-share { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23262626' stroke-width='2'%3E%3Cline x1='22' y1='2' x2='11' y2='13'%3E%3C/line%3E%3Cpolygon points='22 2 15 22 11 13 2 9 22 2'%3E%3C/polygon%3E%3C/svg%3E"); }
-
-        /* کپشن */
-        .caption-container { padding: 0 14px 20px 14px; font-size: 14px; line-height: 1.5; color: #262626; text-align: right; }
-        .caption-username { font-weight: 600; margin-left: 5px; }
-        #caption-text { white-space: pre-wrap; } 
-
-        /* تایمر */
-        #timer-bar { position: fixed; top: 0; left: 0; width: 100%; background: #262626; color: white; padding: 12px; text-align: center; font-weight: bold; font-size: 16px; display: none; z-index: 100; box-shadow: 0 2px 5px rgba(0,0,0,0.2); }
-        .timer-red { background-color: #ed4956 !important; }
-
-        /* پیام خطا */
-        #error-msg { position: fixed; bottom: 10px; left: 10px; right: 10px; background: #ffebee; color: #c62828; border: 1px solid #ef9a9a; padding: 15px; border-radius: 5px; display: none; direction: ltr; font-family: monospace; z-index: 2000; font-size: 12px; }
+        .avatar { width: 32px; height: 32px; background: #efefef; border-radius: 50%; margin-left: 10px; }
+        .username { font-weight: 600; font-size: 14px; flex-grow: 1; text-align: right; }
+        .post-img { width: 100%; height: auto; display: block; object-fit: cover; }
+        .actions { padding: 10px 14px; display: flex; gap: 15px; }
+        .caption { padding: 0 14px 14px; font-size: 14px; line-height: 1.6; text-align: right; direction: rtl; }
+        .caption .user { font-weight: 600; margin-left: 5px; }
+        #timer-bar { position: fixed; top: 0; left: 0; height: 5px; background: #0095f6; width: 100%; z-index: 1000; display: none; transition: width 1s linear; }
+        #timer-msg { position: fixed; top: 5px; left: 50%; transform: translateX(-50%); background: rgba(0,0,0,0.7); color: white; padding: 5px 15px; border-radius: 20px; font-size: 12px; z-index: 1001; display: none; }
     </style>
 </head>
 <body>
 
-    <div id="timer-bar">زمان باقی‌مانده: <span id="time-left">30</span> ثانیه</div>
-
-    <div id="intro-box">
-        <h2>👋 هوادار عزیز</h2>
-        <p>
-            با سلام و سپاس از مشارکت شما. در ادامه، یک پست از صفحه اینستاگرام یک تیم ورزشی را مشاهده خواهید کرد.
-            <br><br>
-            لطفاً آن را همانند زمانی که در شبکه‌های اجتماعی به محتوا نگاه می‌کنید، <b>با دقت ببینید.</b>
-            <br><br>
-            پس از <b>۳۰ ثانیه</b> مشاهده، به صورت خودکار به صفحه سوالات هدایت می‌شوید.
+    <!-- خوش‌آمدگویی -->
+    <div id="welcome-overlay">
+        <h1>👋 سلام هوادار عزیز</h1>
+        <p style="line-height: 1.8; max-width: 400px; margin-bottom: 30px; color: #ddd;">
+            در ادامه تصویر یک محصول ورزشی به مدت <b>۳۰ ثانیه</b> نمایش داده می‌شود.<br>
+            لطفاً با دقت به تصویر و متن زیر آن نگاه کنید.
         </p>
-        <button class="btn" onclick="startExperiment()">مشاهده پست</button>
+        <button class="btn-start" onclick="startTest()">مشاهده پست</button>
     </div>
 
-    <div id="post-container">
+    <!-- تایمر و کارت -->
+    <div id="timer-bar"></div>
+    <div id="timer-msg">زمان باقی‌مانده: <span id="time-left">30</span> ثانیه</div>
+
+    <div class="instagram-card" id="post-card">
         <div class="header">
             <div class="avatar"></div>
-            <div class="username">Team_Official_Page</div>
+            <div class="username">Team_Official</div>
         </div>
         
-        <img id="product-img" src="" alt="Post Image">
+        <img id="main-image" src="" class="post-img" alt="Product">
 
         <div class="actions">
-            <div class="icon icon-heart"></div>
-            <div class="icon icon-comment"></div>
-            <div class="icon icon-share"></div>
+            <svg aria-label="Like" height="24" viewBox="0 0 24 24" width="24"><path d="M16.792 3.904A4.989 4.989 0 0 1 21.5 9.122c0 3.072-2.652 4.956-5.197 7.222-2.512 2.243-3.865 3.469-4.303 3.752-.477-.309-2.143-1.823-4.303-3.752C5.141 14.072 2.5 12.167 2.5 9.122a4.989 4.989 0 0 1 4.708-5.218 4.21 4.21 0 0 1 3.675 1.941c.84 1.175.98 1.763 1.12 1.763s.278-.588 1.11-1.766a4.17 4.17 0 0 1 3.679-1.938m0-2a6.04 6.04 0 0 0-4.797 2.127 6.052 6.052 0 0 0-4.787-2.127A6.985 6.985 0 0 0 .5 9.122c0 3.61 2.55 5.827 5.015 7.97.283.246.569.494.853.747l1.027.918a44.998 44.998 0 0 0 3.518 3.018 2 2 0 0 0 2.174 0 45.263 45.263 0 0 0 3.626-3.115l.922-.824c.293-.26.59-.519.885-.774 2.334-2.025 4.98-4.32 4.98-7.94a6.985 6.985 0 0 0-6.708-7.218Z"></path></svg>
+            <svg aria-label="Comment" height="24" viewBox="0 0 24 24" width="24"><path d="M20.656 17.008a9.993 9.993 0 1 0-3.59 3.615L22 22Z" fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="2"></path></svg>
+            <svg aria-label="Share" height="24" viewBox="0 0 24 24" width="24"><line fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="2" x1="22" x2="9.218" y1="3" y2="10.083"></line><polygon fill="none" points="11.698 20.334 22 3.001 2 3.001 9.218 10.084 11.698 20.334" stroke="currentColor" stroke-linejoin="round" stroke-width="2"></polygon></svg>
         </div>
 
-        <div class="caption-container">
-            <span class="caption-username">Team_Official_Page</span>
+        <div class="caption">
+            <span class="user">Team_Official</span>
             <span id="caption-text"></span>
         </div>
     </div>
 
-    <div id="error-msg"></div>
-
     <script>
-        // =========================================================
-        // بخش ۱: شماره گروه (فقط این عدد را برای فایل‌های دیگر عوض کنید)
-        // =========================================================
+        // ==========================================
+        //  تنظیمات کاربر (فقط اینجا را تغییر دهید)
+        // ==========================================
         
-        var GROUP_ID = 2; 
+        // ۱. شماره گروه را اینجا بنویسید (۱ تا ۱۶)
+        const GROUP_ID = 2; 
 
-        // =========================================================
-        // بخش ۲: لینک‌های شما (لینک‌های جدید را اینجا اضافه کنید)
-        // =========================================================
-        
-        var ALL_LINKS = {
-            2: "https://survey.porsline.ir/s/97Ze9HGF?qs=K1VBWY613tjie9m",
-            // برای گروه‌های بعدی، خط‌های زیر را پر کنید:
-            // 2: "لینک_گروه_2",
-        };
+        // ۲. نام عکس را اینجا بنویسید (shirt.jpg یا cap.jpg)
+        const PRODUCT_IMG = "shirt.jpg";
 
-        // =========================================================
-        // بخش ۳: دیتابیس متن و عکس (دست نزنید)
-        // =========================================================
-        var database = {
-            1:  { img: "shirt.jpg", txt: "پیراهن جدید فصل با طراحی منحصر به فرد. این پیراهن افتخار را به شما هدیه می‌دهد." },
-            2:  { img: "shirt.jpg", txt: "👕 جدید فصل با طراحی منحصر به فرد. این 👕 افتخار را به شما هدیه می‌دهد." },
-            3:  { img: "shirt.jpg", txt: "پیراهن جدید فصل با طراحی منحصر به فرد. این پیراهن افتخار را به شما هدیه می‌دهد. ✨" },
-            4:  { img: "shirt.jpg", txt: "🆕 👕 فصل با طراحی منحصر به فرد ✨ همین حالا به جمع ما بپیوندید 👇" },
+        // ۳. لینک پرس‌لاین مخصوص این گروه را اینجا بگذارید
+        const SURVEY_LINK = 2: "https://survey.porsline.ir/s/97Ze9HGF?qs=K1VBWY613tjie9m",
+
+        // ==========================================
+        //  پایان تنظیمات (دست به بقیه کد نزنید)
+        // ==========================================
+
+        // دیتابیس متن‌ها (استخراج شده از فایل ورد شما)
+        const allCaptions = {
+            1: "پیراهن جدید فصل با طراحی منحصر به فرد. این پیراهن افتخار را به شما هدیه می‌دهد.",
+            2: "👕 جدید فصل با طراحی منحصر به فرد. این 👕 افتخار را به شما هدیه می‌دهد.",
+            3: "پیراهن جدید فصل با طراحی منحصر به فرد. این پیراهن افتخار را به شما هدیه می‌دهد. ✨",
+            4: "🆕 👕 فصل با طراحی منحصر به فرد ✨ همین حالا به جمع ما بپیوندید 👇",
             
-            5:  { img: "cap.jpg", txt: "کلاه جدید تیم با طرح باشگاه. هر روز صبح را با تیم خود شروع کنید." },
-            6:  { img: "cap.jpg", txt: "🧢 جدید تیم با طرح باشگاه. هر روز صبح را با تیم خود شروع کنید." },
-            7:  { img: "cap.jpg", txt: "کلاه جدید تیم با طرح باشگاه. هر روز صبح را با تیم خود شروع کنید. ☀️" },
-            8:  { img: "cap.jpg", txt: "🆕 🧢 تیم با طرح باشگاه ☀️ همین حالا سفارش دهید 👇" },
+            5: "کلاه جدید تیم با طرح باشگاه. هر روز صبح را با تیم خود شروع کنید.",
+            6: "🧢 جدید تیم با طرح باشگاه. هر روز صبح را با تیم خود شروع کنید.",
+            7: "کلاه جدید تیم با طرح باشگاه. هر روز صبح را با تیم خود شروع کنید. ☀️",
+            8: "🆕 🧢 تیم با طرح باشگاه ☀️ همین حالا سفارش دهید 👇",
 
-            9:  { img: "shirt.jpg", txt: "پیراهن جدید فصل با طراحی منحصر به فرد. این پیراهن افتخار را به شما هدیه می‌دهد." },
-            10: { img: "shirt.jpg", txt: "👕 جدید فصل با طراحی منحصر به فرد. این 👕 افتخار را به شما هدیه می‌دهد." },
-            11: { img: "shirt.jpg", txt: "پیراهن جدید فصل با طراحی منحصر به فرد. این پیراهن افتخار را به شما هدیه می‌دهد. ✨" },
-            12: { img: "shirt.jpg", txt: "🆕 👕 فصل با طراحی منحصر به فرد ✨ همین حالا به جمع ما بپیوندید 👇" },
+            9: "پیراهن جدید فصل با طراحی منحصر به فرد. این پیراهن افتخار را به شما هدیه می‌دهد.",
+            10: "👕 جدید فصل با طراحی منحصر به فرد. این 👕 افتخار را به شما هدیه می‌دهد.",
+            11: "پیراهن جدید فصل با طراحی منحصر به فرد. این پیراهن افتخار را به شما هدیه می‌دهد. ✨",
+            12: "🆕 👕 فصل با طراحی منحصر به فرد ✨ همین حالا به جمع ما بپیوندید 👇",
 
-            13: { img: "cap.jpg", txt: "کلاه جدید تیم با طرح باشگاه. هر روز صبح را با تیم خود شروع کنید." },
-            14: { img: "cap.jpg", txt: "🧢 جدید تیم با طرح باشگاه. هر روز صبح را با تیم خود شروع کنید." },
-            15: { img: "cap.jpg", txt: "کلاه جدید تیم با طرح باشگاه. هر روز صبح را با تیم خود شروع کنید. ☀️" },
-            16: { img: "cap.jpg", txt: "🆕 🧢 تیم با طرح باشگاه ☀️ همین حالا سفارش دهید 👇" }
+            13: "کلاه جدید تیم با طرح باشگاه. هر روز صبح را با تیم خود شروع کنید.",
+            14: "🧢 جدید تیم با طرح باشگاه. هر روز صبح را با تیم خود شروع کنید.",
+            15: "کلاه جدید تیم با طرح باشگاه. هر روز صبح را با تیم خود شروع کنید. ☀️",
+            16: "🆕 🧢 تیم با طرح باشگاه ☀️ همین حالا سفارش دهید 👇"
         };
 
-        // تابع اصلی اجرای برنامه
-        function startExperiment() {
-            try {
-                var data = database[GROUP_ID];
-                if (!data) { alert("خطا: گروه " + GROUP_ID + " پیدا نشد."); return; }
+        // اعمال تنظیمات به صورت خودکار
+        document.getElementById('caption-text').innerText = allCaptions[GROUP_ID];
+        document.getElementById('main-image').src = PRODUCT_IMG;
 
-                document.getElementById('intro-box').style.display = 'none';
-                document.getElementById('post-container').style.display = 'block';
+        function startTest() {
+            document.getElementById('welcome-overlay').style.opacity = '0';
+            setTimeout(() => {
+                document.getElementById('welcome-overlay').style.display = 'nonedocument.getElementById('post-card').style.display = 'flex';
                 document.getElementById('timer-bar').style.display = 'block';
-
-                var imgElement = document.getElementById('product-img');
-                imgElement.src = data.img;
-                imgElement.onerror = function() { logError("تصویر " + data.img + " یافت نشد."); };
-                
-                document.getElementById('caption-text').innerText = data.txt;
-
-                var seconds = 30;
-                var timerDisplay = document.getElementById('time-left');
-                var timerBar = document.getElementById('timer-bar');
-
-                var interval = setInterval(function() {
-                    seconds--;
-                    timerDisplay.innerText = seconds;
-                    if (seconds <= 5) timerBar.classList.add('timer-red');
-                    if (seconds <= 0) {
-                        clearInterval(interval);
-                        finishExperiment();
-                    }
-                }, 1000);
-            } catch (err) { logError(err.message); }
-        }
-
-        // تابع پایان و هدایت به لینک
-        function finishExperiment() {
-            document.body.innerHTML = '<div style="text-align:center; padding:50px;"><h2>زمان تمام شد.</h2><p>در حال انتقال به پرسشنامه...</p></div>';
-            
-            // انتخاب لینک مناسب از لیست
-            var targetLink = ALL_LINKS[GROUP_ID];
-            
-            setTimeout(function() {
-                if(targetLink) {
-                    window.location.href = targetLink;
-                } else {
-                    alert("لینک پرسشنامه برای گروه " + GROUP_ID + " در کد تعریف نشده است!");
-                }
-            }, 1500);
-        }
-
-        function logError(msg) {
-            var errBox = document.getElementById('error-msg');
-            errBox.style.display = 'block';
-            errBox.innerHTML += "ERROR: " + msg + "<br>";
-            document.getElementById('intro-box').style.display = 'block';
-            document.getElementById('post-container').style.display = 'none';
-        }
-
-        window.onerror = function(message) { logError("System Error: " + message); };
-
-    </script>
-</body>
-</html>
+                document.getElementById('timer-msg').style.display = 'block';
+                runTimer();
+            }, 500);
+          }, 500);
