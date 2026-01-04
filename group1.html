@@ -4,12 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <!-- عنوان دقیق تحقیق -->
+    <!-- اصلاح شماره ۱: عنوان دقیق در تب مرورگر و لینک‌ها -->
     <title>تأثیر راهبردهای ایموجی و سطح درگیری محصول بر اثربخشی تبلیغات ورزشی</title>
     
+    <!-- اصلاح متاتگ‌ها برای نمایش درست در واتس‌اپ -->
     <meta property="og:title" content="تأثیر راهبردهای ایموجی و سطح درگیری محصول بر اثربخشی تبلیغات ورزشی">
-    <meta property="og:description" content="لطفاً برای شرکت در پژوهش کلیک کنید.">
-    <meta property="og:image" content="shirt.jpg?v=3">
+    <meta property="og:description" content="برای شرکت در پژوهش کلیک کنید.">
+    <meta property="og:image" content="shirt.jpg">
     <meta property="og:type" content="website">
 
     <style>
@@ -22,60 +23,72 @@
             background-color: #fafafa;
             margin: 0;
             font-family: 'IRANSans', sans-serif;
-            overflow: hidden; /* جلوگیری از اسکرول تا قبل از شروع */
+            overflow: hidden; /* جلوگیری از اسکرول تا قبل از زدن دکمه */
         }
 
-        /* استایل صفحه خوش‌آمدگویی */
+        /* استایل صفحه خوش‌آمدگویی (اصلاح شماره ۲) */
         #welcome-overlay {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.85);
-            z-index: 10000;
-            display: flex;
+            background: rgba(0, 0, 0, 0.9); /* پس‌زمینه تیره */
+            z-index: 99999; /* بالاترین لایه */
+            display: flex; /* پیش‌فرض نمایش داده شود */
             justify-content: center;
             align-items: center;
             padding: 20px;
             box-sizing: border-box;
+            text-align: right;
+            direction: rtl;
         }
 
         .welcome-box {
             background: white;
             padding: 30px;
-            border-radius: 15px;
-            max-width: 500px;
-            text-align: center;
+            border-radius: 12px;
+            max-width: 450px;
+            width: 100%;
             line-height: 1.8;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
 
         .welcome-box h2 {
             margin-top: 0;
-            color: #333;
+            color: #262626;
+            font-size: 20px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 15px;
+        }
+
+        .welcome-box p {
+            font-size: 15px;
+            color: #555;
+            margin-bottom: 15px;
         }
 
         .start-btn {
             background-color: #0095f6;
             color: white;
             border: none;
-            padding: 12px 30px;
+            padding: 12px 0;
+            width: 100%;
             font-size: 16px;
             border-radius: 8px;
+            font-weight: bold;
             cursor: pointer;
-            margin-top: 20px;
             font-family: 'IRANSans', sans-serif;
-            transition: background 0.3s;
+            margin-top: 10px;
         }
 
-        .start-btn:hover {
+        .start-btn:active {
             background-color: #0074cc;
         }
 
-        /* استایل کانتینر اصلی */
+        /* استایل کانتینر اصلی (ابتدا مخفی است) */
         #main-content {
-            display: none; /* در ابتدا مخفی است */
+            display: none; 
             justify-content: center;
             align-items: center;
             min-height: 100vh;
@@ -135,6 +148,7 @@
             padding: 0 14px 14px 14px;
             font-size: 14px;
             line-height: 1.5;
+            text-align: right;
         }
 
         .caption-username {
@@ -150,7 +164,6 @@
             height: 5px;
             background-color: #0095f6;
             width: 100%;
-            transition: width 1s linear;
             z-index: 9999;
         }
         
@@ -160,22 +173,22 @@
             right: 10px;
             background: rgba(0,0,0,0.7);
             color: white;
-            padding: 5px 10px;
+            padding: 5px 12px;
             border-radius: 20px;
-            font-size: 12px;
+            font-size: 13px;
             z-index: 9999;
         }
     </style>
 </head>
 <body>
 
-    <!-- بخش خوش‌آمدگویی و دستورالعمل -->
+    <!-- بخش خوش‌آمدگویی (دقیقاً طبق متن درخواستی) -->
     <div id="welcome-overlay">
         <div class="welcome-box">
             <h2>👋 هوادار عزیز</h2>
             <p>با سلام و سپاس از مشارکت شما. در ادامه، یک پست از صفحه اینستاگرام یک تیم ورزشی را مشاهده خواهید کرد.</p>
-            <p style="color: #666; font-size: 0.95em;">لطفاً آن را همانند زمانی که در شبکه‌های اجتماعی به محتوا نگاه می‌کنید، با دقت ببینید.</p>
-            <p style="font-weight: bold; color: #0095f6;">پس از ۳۰ ثانیه مشاهده، به صورت خودکار به صفحه سوالات هدایت می‌شوید.</p>
+            <p>لطفاً آن را همانند زمانی که در شبکه‌های اجتماعی به محتوا نگاه می‌کنید، با دقت ببینید.</p>
+            <p style="color: #0095f6; font-weight: bold;">پس از ۳۰ ثانیه مشاهده، به صورت خودکار به صفحه سوالات هدایت می‌شوید.</p>
             <button class="start-btn" onclick="startExperiment()">مشاهده پست</button>
         </div>
     </div>
@@ -197,41 +210,6 @@
             </div>
 
             <div class="action-bar">
-                <svg aria-label="Like" height="24" role="img" viewBox="0 0 24 24" width="24"><path d="M16.792 3.904A4.989 4.989 0 0 1 21.5 9.122c0 3.072-2.652 4.959-5.197 7.222-2.512 2.243-3.865 3.469-4.303 3.752-.477-.309-2.143-1.823-4.303-3.752C5.141 14.072 2.5 12.167 2.5 9.122a4.989 4.989 0 0 1 4.708-5.218 4.21 4.21 0 0 1 3.675 1.941c.84 1.175.98 1.763 1.12 1.763s.278-.588 1.11-1.766a4.17 4.17 0 0 1 3.68-1.948z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+                <svg aria-label="Like" height="24" role="img" viewBox="0 0 24 24" width="24"><path d="M16.792 3.904A4.989 4.989 0 0 1 21.5 9.122c0 3.072-2.652 4.959-5.197 7.222-2.512 2.243-3.865 3.469-4.303 3.752-.477-.309-2.143-1.823-4.303-3.752C5.141 14.072 2.5 12.167 2.5 9.122a4.989 4.989 0 0 1 4.708-5.218 4.21 4.21 0 0 1 3.675 1.941c.84 1.175.98 1.763 1.12 1.763s.278-.588 1.11-1.766a4.1 4.17 0 0 1 3.68-1.948z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
                 <svg aria-label="Comment" height="24" role="img" viewBox="0 0 24 24" width="24" style="margin-right: 15px;"><path d="M20.656 17.008a9.993 9.993 0 1 0-3.59 3.615L22 22z" fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="2"></path></svg>
-                <svg aria-label="Share" height="24" role="img" viewBox="0 0 24 24" width="24" style="margin-right: 15px;"><line fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="2" x1="22" x2="9.218" y1="3" y2="10.083"></line><polygon fill="none" points="11.698 20.334 22 3.001 2 3.001 9.218 10.084 11.698 20.334" stroke="currentColor" stroke-linejoin="round" stroke-width="2"></polygon></svg>
-                <svg aria-label="Save" height="24" role="img" viewBox="0 0 24 24" width="24" style="margin-right: auto;"><polygon fill="none" points="20 21 12 13.44 4 21 4 3 20 3 20 21" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></polygon></svg>
-            </div>
-            <div style="padding: 0 14px; font-weight: 600; font-size: 14px; margin-bottom: 8px;">0 likes</div>
-
-            <div class="caption">
-                <span class="username caption-username">sport_team_official</span>
-                <span id="caption-text"></span>
-            </div>
-        </div>
-    </div>
-
-    <script>
-        // ==========================================
-        // تنظیمات گروه ۱
-        // ==========================================
-        var GROUP_ID = 1; 
-
-        var ALL_LINKS = {
-            // *** لینک پرس‌لاین را دقیقاً بین دو علامت نقل قول پایین بگذارید ***
-            1: "https://survey.porsline.ir/s/97Ze9HGF?qs=R1VBWY60FHjie9l",
-        };
-        // ==========================================
-
-        var CAPTIONS = {
-            1: "این پیراهن جدید تیم ما برای فصل آینده است. طراحی ارگونومیک آن باعث راحتی بیشتر بازیکنان در زمین می‌شود.",
-            2: "این 👕 جدید تیم ما برای فصل آینده است. طراحی ارگونومیک آن باعث راحتی بیشتر بازیکنان در زمین می‌شود.",
-            3: "این پیراهن جدید تیم ما برای فصل آینده است. طراحی ارگونومیک آن باعث راحتی بیشتر بازیکنان در زمین می‌شود. ✨",
-            4: "این 👕 جدید تیم ما برای فصل آی است 🆕. طراحی ارگونومیک آن باعث راحتی بیشتر بازیکنان در زمین می‌شود ✨. کیفیت عالی 👇.",
-            5: "این کلاه جدید هواداری برای حمایت از تیم است. لبه‌دوزی مقاوم آن از تابش مستقیم آفتاب جلوگیری می‌کند.",
-             "این 🧢 جدید هواداری برای حمایت از تیم است. لبه‌دوزی مقاوم آن از تابش مستقیم ☀️ جلوگیری می‌کند.",
-            7: "این کلاه جدید هواداری برای حمایت از تیم است. لبه‌دوزی مقاوم آن از تابش مستقیم آفتاب جلوگیری می‌کن. ☀️",
-            8: "این 🧢 جدید هواداری برای حمایت از تیم است 🆕. لبه‌دوزی مقاوم آن از تابش مستقیم ☀️ جلوگیری می‌کند ✨. کیفیت عالی 👇.",
-            9: "این پیراهن جدید تیم ما برای فصل آینده است. طراحیگونومیک آن باعث راحتی بیشتر بازیکنان در زمین می‌شود.",
-            10: "این 👕 جدید تیم ما برای فصل آینده است. طراحی ارگونومیک آن باعث راحتی بیشتر بازیکنان در زمین می‌شود.",
-            11: "این پیراهن جدید تیم ما برای فصل آینده است
+                <svg aria-label="Share" height="24" role="img" viewBox="0 0 24 24" width="24" style="margin-right: 15px;"><line fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="2" x1="22" x2="
