@@ -10,14 +10,20 @@
     <meta property="og:type" content="website">
     <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/dist/font-face.css" rel="stylesheet" type="text/css" />
     <style>
-        body { margin: 0; padding: 0; font-family: 'Vazirmatn', sans-serif; background: #fafafa; display: flex; justify-content: center; align-items: center; min-height: 100vh; overflow: hidden; }
-        #welcome-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); z-index: 9999; display: flex; justify-content: center; align-items: center; padding: 20px; box-sizing: border-box; }
+        body { margin: 0; padding: 0; font-family: 'Vazirmatn', sans-serif; background: #fafafa; min-height: 100vh; overflow: hidden; /* ابتدا اسکرول بسته است */ }
+        
+        /* استایل مرکزی برای بادی */
+        .container-center { display: flex; justify-content: center; padding-top: 60px; padding-bottom: 40px; }
+
+        #welcome-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 9999; display: flex; justify-content: center; align-items: center; padding: 20px; box-sizing: border-box; transition: opacity 0.5s ease; }
         .welcome-box { background: white; padding: 30px; border-radius: 15px; max-width: 450px; width: 100%; text-align: center; box-shadow: 0 10px 25px rgba(0,0,0,0.2); border: 1px solid #ddd; }
         .welcome-box h1 { margin-top: 0; font-size: 1.4rem; color: #333; margin-bottom: 15px; }
         .welcome-box p { line-height: 1.8; color: #555; font-size: 0.95rem; margin-bottom: 25px; text-align: justify; }
         .btn-start { background: #0095f6; color: white; border: none; padding: 12px 35px; font-size: 1rem; border-radius: 8px; cursor: pointer; font-family: inherit; font-weight: bold; transition: background 0.2s; }
         .btn-start:hover { background: #0074cc; }
-        .instagram-card { background: white; border: 1px solid #dbdbdb; width: 100%; max-width: 420px; display: none; flex-direction: column; border-radius: 3px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+
+        /* کارت اینستاگرام */
+        .instagram-card { background: white; border: 1px solid #dbdbdb; width: 100%; max-width: 420px; display: none; flex-direction: column; border-radius: 3px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); margin: 0 auto; }
         .header { display: flex; align-items: center; padding: 14px; border-bottom: 1px solid #efefef; }
         .avatar { width: 32px; height: 32px; background: #efefef; border-radius: 50%; margin-left: 10px; }
         .username { font-weight: 600; font-size: 14px; flex-grow: 1; text-align: right; color: #262626; }
@@ -25,11 +31,15 @@
         .actions { padding: 10px 14px; display: flex; gap: 15px; }
         .caption { padding: 0 14px 14px; font-size: 14px; line-height: 1.6; text-align: right; direction: rtl; color: #262626; }
         .caption .user { font-weight: 600; margin-left: 5px; }
+
+        /* تایمر */
         #timer-bar { position: fixed; top: 0; left: 0; height: 5px; background: #0095f6; width: 100%; z-index: 1000; display: none; transition: width 1s linear; }
-        #timer-msg { position: fixed; top: 5px; left: 50%; transform: translateX(-50%); background: rgba(0,0,0,0.7); color: white; padding: 5px 15px; border-radius: 20px; font-size: 12px; z-index: 1001; display: none; }
+        #timer-msg { position: fixed; top: 10px; left: 50%; transform: translateX(-50%); background: rgba(0,0,0,0.7); color: white; padding: 5px 15px; border-radius: 20px; font-size: 12px; z-index: 1001; display: none; }
     </style>
 </head>
 <body>
+
+    <!-- صفحه خوش‌آمدگویی -->
     <div id="welcome-overlay">
         <div class="welcome-box">
             <h1>👋 هوادار عزیز</h1>
@@ -37,24 +47,31 @@
             <button class="btn-start" onclick="startTest()">مشاهده پست</button>
         </div>
     </div>
+
+    <!-- المان‌های تایمر -->
     <div id="timer-bar"></div>
     <div id="timer-msg">زمان باقی‌مانده: <span id="time-left">30</span> ثانیه</div>
-    <div class="instagram-card" id="post-card">
-        <div class="header">
-            <div class="avatar"></div>
-            <div class="username">Team_Official</div>
-        </div>
-        <img id="main-image" src="" class="post-img" alt="Product">
-        <div class="actions">
-            <svg aria-label="Like" height="24" viewBox="0 0 24 24" width="24"><path d="M16.792 3.904A4.989 4.989 0 0 1 21.5 9.122c0 3.072-2.652 4.956-5.197 7.222-2.512 2.243-3.865 3.469-4.303 3.752-.477-.309-2.143-1.823-4.303-3.752C5.141 14.072 2.5 12.167 2.5 9.122a4.989 4.989 0 0 1 4.708-5.218 4.21 4.21 0 0 1 3.675 1.941c.84 1.175.98 1.763 1.12 1.763s.278-.588 1.11-1.766a4.17 4.17 0 0 1 3.679-1.938m0-2a6.04 6.04 0 0 0-4.797 2.127 6.052 6.052 0 0 0-4.787-2.127A6.985 6.985 0 0 0 .5 9.122c0 3.61 2.55 5.827 5.015 7.97.283.246.569.494.853.747l1.027.918a44.998 44.998 0 0 0 3.518 3.018 2 2 0 0 0 2.174 0 45.263 45.263 0 0 0 3.626-3.115l.922-.824c.293-.26.59-.519.885-.774 2.334-2.025 4.98-4.32 4.98-7.94a6.985 6.985 0 0 0-6.708-7.218Z"></path></svg>
-            <svg aria-label="Comment" height="24" viewBox="0 0 24 24" width="24"><path d="M20.656 17.008a9.993 9.993 0 1 0-3.59 3.615L22 22Z" fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="2"></path></svg>
-            <svg aria-label="Share" height="24" viewBox="0 0 24 24" width="24"><line fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="2" x1="22" x2="9.218" y1="3" y2="10.083"></line><polygon fill="none" points="11.698 20.334 22 3.001 2 3.001 9.218 10.084 11.698 20.334" stroke="currentColor" stroke-linejoin="round" stroke-width="2"></polygon></svg>
-        </div>
-        <div class="caption">
-            <span class="user">Team_Official</span>
-            <span id="caption-text"></span>
+
+    <!-- کانتینر اصلی پست -->
+    <div class="container-center">
+        <div class="instagram-card" id="post-card">
+            <div class="header">
+                <div class="avatar"></div>
+                <div class="username">Team_Official</div>
+            </div>
+            <img id="main-image" src="" class="post-img" alt="Product">
+            <div class="actions">
+                <svg aria-label="Like" height="24" viewBox="0 0 24 24" width="24"><path d="M16.792 3.904A4.989 4.989 0 0 1 21.5 9.122c0 3.072-2.652 4.956-5.197 7.222-2.512 2.243-3.865 3.469-4.303 3.752-.477-.309-2.143-1.823-4.303-3.752C5.141 14.072 2.5 12.167 2.5 9.122a4.989 4.989 0 0 1 4.708-5.218 4.21 4.21 0 0 1 3.675 1.941c.84 1.175.98 1.763 1.12 1.763s.278-.588 1.11-1.766a4.17 4.17 0 0 1 3.679-1.938m0-2a6.04 6.04 0 0 0-4.797 2.127 6.052 6.052 0 0 0-4.787-2.127A6.985 6.985 0 0 0 .5 9.122c0 3.61 2.55 5.827 5.015 7.97.283.246.569.494.853.747l1.027.918a44.998 44.998 0 0 0 3.518 3.018 2 2 0 0 0 2.174 0 45.263 45.263 0 0 0 3.626-3.115l.922-.824c.293-.26.59-.519.885-.774 2.334-2.025 4.98-4.32 4.98-7.94a6.985 6.985 0 0 0-6.708-7.218Z"></path></svg>
+                <svg aria-label="Comment" height="24" viewBox="0 0 24 24" width="24"><path d="M20.656 17.008a9.993 9.993 0 1 0-3.59 3.615L22 22Z" fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="2"></path></svg>
+                <svg aria-label="Share" height="24" viewBox="0 0 24 24" width="24"><line fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="2" x1="22" x2="9.218" y1="3" y2="10.083"></line><polygon fill="none" points="11.698 20.334 22 3.001 2 3.001 9.218 10.084 11.698 20.334" stroke="currentColor" stroke-linejoin="round" stroke-width="2"></polygon></svg>
+            </div>
+            <div class="caption">
+                <span class="user">Team_Official</span>
+                <span id="caption-text"></span>
+            </div>
         </div>
     </div>
+
     <script>
         // ==========================================
         //  تنظیمات گروه ۳ (پیراهن + ایموجی تکمیل‌کننده ✨)
@@ -63,8 +80,8 @@
         const GROUP_ID = 3; 
         const PRODUCT_IMG = "shirt.jpg"; 
         
-        // >>>>>> مهم: لینک زیر را پاک کنید و لینک واقعی پرس‌لاین گروه ۳ را بگذارید <<<<<<
-        const SURVEY_LINK = 3: "https://survey.porsline.ir/s/97Ze9HGF?qs=M1VBWY62tujie9n"; 
+        // لینک پرس‌لاین متصل به گروه ۳
+        const SURVEY_LINK = "https://survey.porsline.ir/s/97Ze9HGF?qs=M1VBWY62tujie9n"; 
 
         const allCaptions = {
             1: "پیراهن جدید فصل با طراحی منحصر به فرد. این پیراهن افتخار را به شما هدیه می‌دهد.",
@@ -85,17 +102,29 @@
             16: "🆕 🧢 تیم با طرح باشگاه ☀️ همین حالا سفارش دهید 👇"
         };
 
+        // اعمال تنظیمات اولیه
         document.getElementById('caption-text').innerText = allCaptions[GROUP_ID];
         document.getElementById('main-image').src = PRODUCT_IMG;
         document.querySelector('meta[property="og:image"]').setAttribute("content", "https://sardarmohammadii-create.github.io/sport-research/" + PRODUCT_IMG);
 
         function startTest() {
-            document.getElementById('welcome-overlay').style.opacity = '0';
+            // محو کردن لایه خوش‌آمدگویی
+            const overlay = document.getElementById('welcome-overlay');
+            overlay.style.opacity = '0';
+            
+            // باز کردن قفل اسکرول بادی
+            document.body.style.overflow = 'auto';
+
             setTimeout(() => {
-                document.getElementById('welcome-overlay').style.display = 'none';
+                overlay.style.display = 'none'; // حذف کامل لایه از صفحه
+                
+                // نمایش کارت پست
                 document.getElementById('post-card').style.display = 'flex';
+                
+                // نمایش تایمر
                 document.getElementById('timer-bar').style.display = 'block';
                 document.getElementById('timer-msg').style.display = 'block';
+                
                 runTimer();
             }, 500);
         }
@@ -104,10 +133,19 @@
             let time = 30;
             const bar = document.getElementById('timer-bar');
             const txt = document.getElementById('time-left');
+            
+            // شروع پر شدن نوار تایمر
+            bar.style.width = "100%"; // ابتدا پر باشد یا برعکس، اینجا منطق کاهش عرض را داریم:
+            // برای کاهش عرض:
+            bar.style.width = "0%";
+            
             const interval = setInterval(() => {
                 time--;
                 txt.textContent = time;
-                bar.style.width = (time / 30 * 100) + "%";
+                // محاسبه درصد برای نوار پیشرفت (پر شدن تدریجی)
+                const percentage = ((30 - time) / 30) * 100;
+                bar.style.width = percentage + "%";
+                
                 if (time <= 0) {
                     clearInterval(interval);
                     window.location.href = SURVEY_LINK;
