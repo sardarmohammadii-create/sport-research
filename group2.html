@@ -3,39 +3,52 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>پژوهش رفتار هواداری در ورزش</title>
-    <!-- تنظیمات واتس‌اپ و تلگرام -->
+    <!-- ۱. اصلاح عنوان صفحه -->
+    <title>تأثیر راهبردهای ایموجی و سطح درگیری محصول بر اثربخشی تبلیغات ورزشی</title>
+    
     <meta property="og:title" content="پژوهش رفتار هواداری در ورزش">
     <meta property="og:description" content="لطفاً ۳۰ ثانیه زمان بگذارید و در این نظرسنجی شرکت کنید.">
-    <meta property="og:image" content="https://sardarmohammadii-create.github.io/sport-research/shirt.jpg">
     
     <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/dist/font-face.css" rel="stylesheet" type="text/css" />
     <style>
         body { margin: 0; padding: 0; font-family: 'Vazirmatn', sans-serif; background: #fafafa; display: flex; justify-content: center; align-items: center; min-height: 100vh; overflow: hidden; }
-        #welcome-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); z-index: 9999; display: flex; flex-direction: column; justify-content: center; align-items: center; color: white; text-align: center; padding: 20px; box-sizing: border-box; }
-        .btn-start { background: #0095f6; color: white; border: none; padding: 15px 40px; font-size: 1.1rem; border-radius: 8px; cursor: pointer; margin-top: 20px; font-family: inherit; font-weight: bold; }
-        .instagram-card { background: white; border: 1px solid #dbdbdb; width: 100%; max-width: 420px; display: none; flex-direction: column; border-radius: 3px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+        
+        /* استایل صفحه خوش‌آمدگویی (اصلاح شده: کادر سفید اضافه شد) */
+        #welcome-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); z-index: 9999; display: flex; justify-content: center; align-items: center; padding: 20px; box-sizing: border-box; }
+        .welcome-box { background: white; padding: 30px; border-radius: 15px; max-width: 450px; width: 100%; text-align: center; box-shadow: 0 10px 25px rgba(0,0,0,0.2); }
+        .welcome-box h1 { margin-top: 0; font-size: 1.4rem; color: #333; margin-bottom: 15px; }
+        .welcome-box p { line-height: 1.8; color: #555; font-size: 0.95rem; margin-bottom: 25px; text-align: justify; }
+        .btn-start { background: #0095f6; color: white; border: none; padding: 12px 35px; font-size: 1rem; border-radius: 8px; cursor: pointer; font-family: inherit; font-weight: bold; transition: background 0.2s; }
+        .btn-start:hover { background: #0074cc; }
+
+        /* استایل پست اینستاگرام */
+        .instagram-card { background: white; border: 1px solid #dbdbdb; width: 100%; max-width: 420px; display: none; flex-direction: column; border-radius: 3px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
         .header { display: flex; align-items: center; padding: 14px; border-bottom: 1px solid #efefef; }
         .avatar { width: 32px; height: 32px; background: #efefef; border-radius: 50%; margin-left: 10px; }
-        .username { font-weight: 600; font-size: 14px; flex-grow: 1; text-align: right; }
+        .username { font-weight: 600; font-size: 14px; flex-grow: 1; text-align: right; color: #262626; }
         .post-img { width: 100%; height: auto; display: block; object-fit: cover; }
         .actions { padding: 10px 14px; display: flex; gap: 15px; }
-        .caption { padding: 0 14px 14px; font-size: 14px; line-height: 1.6; text-align: right; direction: rtl; }
+        .caption { padding: 0 14px 14px; font-size: 14px; line-height: 1.6; text-align: right; direction: rtl; color: #262626; }
         .caption .user { font-weight: 600; margin-left: 5px; }
+        
+        /* استایل تایمر */
         #timer-bar { position: fixed; top: 0; left: 0; height: 5px; background: #0095f6; width: 100%; z-index: 1000; display: none; transition: width 1s linear; }
         #timer-msg { position: fixed; top: 5px; left: 50%; transform: translateX(-50%); background: rgba(0,0,0,0.7); color: white; padding: 5px 15px; border-radius: 20px; font-size: 12px; z-index: 1001; display: none; }
     </style>
 </head>
 <body>
 
-    <!-- خوش‌آمدگویی -->
+    <!-- ۲. خوش‌آمدگویی با کادر سفید و متن اصلاح شده -->
     <div id="welcome-overlay">
-        <h1>👋 سلام هوادار عزیز</h1>
-        <p style="line-height: 1.8; max-width: 400px; margin-bottom: 30px; color: #ddd;">
-            در ادامه تصویر یک محصول ورزشی به مدت <b>۳۰ ثانیه</b> نمایش داده می‌شود.<br>
-            لطفاً با دقت به تصویر و متن زیر آن نگاه کنید.
-        </p>
-        <button class="btn-start" onclick="startTest()">مشاهده پست</button>
+        <div class="welcome-box">
+            <h1>👋 هوادار عزیز</h1>
+            <p>
+                با سلام و سپاس از مشارکت شما. در ادامه، یک پست از صفحه اینستاگرام یک تیم ورزشی را مشاهده خواهید کرد.<br><br>
+                لطفاً آن را همانند زمانی که در شبکه‌های اجتماعی به محتوا نگاه می‌کنید، با دقت ببینید.<br><br>
+                پس از ۳۰ ثانیه مشاهده، به صورت خودکار به صفحه سوالات هدایت می‌شوید.
+            </p>
+            <button class="btn-start" onclick="startTest()">مشاهده پست</button>
+        </div>
     </div>
 
     <!-- تایمر و کارت -->
@@ -77,10 +90,9 @@
         const SURVEY_LINK = 2: "https://survey.porsline.ir/s/97Ze9HGF?qs=K1VBWY613tjie9m",
 
         // ==========================================
-        //  پایان تنظیمات (دست به بقیه کد نزنید)
+        //  پایان تنظیمات
         // ==========================================
 
-        // دیتابیس متن‌ها (استخراج شده از فایل ورد شما)
         const allCaptions = {
             1: "پیراهن جدید فصل با طراحی منحصر به فرد. این پیراهن افتخار را به شما هدیه می‌دهد.",
             2: "👕 جدید فصل با طراحی منحصر به فرد. این 👕 افتخار را به شما هدیه می‌دهد.",
@@ -103,16 +115,35 @@
             16: "🆕 🧢 تیم با طرح باشگاه ☀️ همین حالا سفارش دهید 👇"
         };
 
-        // اعمال تنظیمات به صورت خودکار
+        // اعمال خودکار متن و عکس
         document.getElementById('caption-text').innerText = allCaptions[GROUP_ID];
         document.getElementById('main-image').src = PRODUCT_IMG;
 
         function startTest() {
             document.getElementById('welcome-overlay').style.opacity = '0';
             setTimeout(() => {
-                document.getElementById('welcome-overlay').style.display = 'nonedocument.getElementById('post-card').style.display = 'flex';
+                document.getElementById('welcome-overlay').style.display = 'none';
+                document.getElementById('post-card').style.display = 'flex';
                 document.getElementById('timer-bar').style.display = 'block';
                 document.getElementById('timer-msg').style.display = 'block';
                 runTimer();
             }, 500);
-          }, 500);
+        }
+
+        function runTimer() {
+            let time = 30;
+            const bar = document.getElementById('timer-bar');
+            const txt = document.getElementById('time-left');
+            const interval = setInterval(() => {
+                time--;
+                txt.textContent = time;
+                bar.style.width = (time / 30 * 100) + "%";
+                if (time <= 0) {
+                    clearInterval(interval);
+                    window.location.href = SURVEY_LINK;
+                }
+            }, 1000);
+        }
+    </script>
+</body>
+</html>
