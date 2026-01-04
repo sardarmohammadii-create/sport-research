@@ -1,16 +1,19 @@
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
-        <!-- تنظیمات نمایش لینک در شبکه‌های اجتماعی -->
-    <meta property="og:title" content="پژوهش دانشگاهی: بررسی تبلیغات ورزشی" />
-    <meta property="og:description" content="با سلام، لطفاً ۳۰ ثانیه زمان بگذارید و در این پژوهش کوتاه شرکت کنید. نظر شما ارزشمند است." />
-    <meta property="og:image" content="https://sardarmohammadii-create.github.io/sport-research/shirt.jpg" />
-    <meta property="og:url" content="https://sardarmohammadii-create.github.io/sport-research/" />
-    <meta property="og:type" content="website" />
-    <meta property="og:locale" content="fa_IR" />
-    <!-- پایان تنظیمات -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- تنظیمات نمایش لینک در شبکه‌های اجتماعی (اصلاح شده و نهایی) -->
+    <meta property="og:title" content="تأثیر راهبردهای ایموجی و سطح درگیری محصول بر اثربخشی تبلیغات ورزشی" />
+    <meta property="og:description" content="با سلام، لطفاً ۳۰ ثانیه زمان بگذارید و در این پژوهش دانشگاهی شرکت کنید. نظر شما ارزشمند است." />
+    <!-- نکته: ?v=2 برای مجبور کردن واتس‌اپ به دانلود مجدد عکس است -->
+    <meta property="og:image" content="https://sardarmohammadii-create.github.io/sport-research/shirt.jpg?v=2" />
+    <meta property="og:url" content="https://sardarmohammadii-create.github.io/sport-research/" />
+    <meta property="og:type" content="article" />
+    <meta property="og:locale" content="fa_IR" />
+    <!-- پایان تنظیمات -->
+
     <title>شبیه‌ساز پست اینستاگرام</title>
     <style>
         /* استایل‌های عمومی */
@@ -30,168 +33,4 @@
         #post-container { display: none; background: white; border: 1px solid #dbdbdb; max-width: 400px; width: 100%; border-radius: 3px; margin-top: 50px; }
         .header { display: flex; align-items: center; padding: 14px; border-bottom: 1px solid #efefef; }
         .avatar { width: 32px; height: 32px; background-color: #efefef; border-radius: 50%; border: 1px solid #dbdbdb; margin-left: 10px; flex-shrink: 0; }
-        .username { font-weight: 600; font-size: 14px; color: #262626; text-align: right; width: 100%; }
-        
-        /* تصویر محصول */
-        #product-img { width: 100%; display: block; object-fit: cover; min-height: 300px; background: #fafafa; }
-        
-        /* آیکون‌ها */
-        .actions { padding: 10px 14px; display: flex; gap: 16px; direction: ltr; } 
-        .icon { width: 24px; height: 24px; display: block; background-size: contain; background-repeat: no-repeat; cursor: pointer; }
-        .icon-heart { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23262626' stroke-width='2'%3E%3Cpath d='M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z'%3E%3C/path%3E%3C/svg%3E"); }
-        .icon-comment { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23262626' stroke-width='2'%3E%3Cpath d='M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z'%3E%3C/path%3E%3C/svg%3E"); transform: rotateY(180deg); }
-        .icon-share { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23262626' stroke-width='2'%3E%3Cline x1='22' y1='2' x2='11' y2='13'%3E%3C/line%3E%3Cpolygon points='22 2 15 22 11 13 2 9 22 2'%3E%3C/polygon%3E%3C/svg%3E"); }
-
-        /* کپشن */
-        .caption-container { padding: 0 14px 20px 14px; font-size: 14px; line-height: 1.5; color: #262626; text-align: right; }
-        .caption-username { font-weight: 600; margin-left: 5px; }
-        #caption-text { white-space: pre-wrap; } 
-
-        /* تایمر */
-        #timer-bar { position: fixed; top: 0; left: 0; width: 100%; background: #262626; color: white; padding: 12px; text-align: center; font-weight: bold; font-size: 16px; display: none; z-index: 100; box-shadow: 0 2px 5px rgba(0,0,0,0.2); }
-        .timer-red { background-color: #ed4956 !important; }
-
-        /* پیام خطا */
-        #error-msg { position: fixed; bottom: 10px; left: 10px; right: 10px; background: #ffebee; color: #c62828; border: 1px solid #ef9a9a; padding: 15px; border-radius: 5px; display: none; direction: ltr; font-family: monospace; z-index: 2000; font-size: 12px; }
-    </style>
-</head>
-<body>
-
-    <div id="timer-bar">زمان باقی‌مانده: <span id="time-left">30</span> ثانیه</div>
-
-    <div id="intro-box">
-        <h2>👋 هوادار عزیز</h2>
-        <p>
-            با سلام و سپاس از مشارکت شما. در ادامه، یک پست از صفحه اینستاگرام یک تیم ورزشی را مشاهده خواهید کرد.
-            <br><br>
-            لطفاً آن را همانند زمانی که در شبکه‌های اجتماعی به محتوا نگاه می‌کنید، <b>با دقت ببینید.</b>
-            <br><br>
-            پس از <b>۳۰ ثانیه</b> مشاهده، به صورت خودکار به صفحه سوالات هدایت می‌شوید.
-        </p>
-        <button class="btn" onclick="startExperiment()">مشاهده پست</button>
-    </div>
-
-    <div id="post-container">
-        <div class="header">
-            <div class="avatar"></div>
-            <div class="username">Team_Official_Page</div>
-        </div>
-        
-        <img id="product-img" src="" alt="Post Image">
-
-        <div class="actions">
-            <div class="icon icon-heart"></div>
-            <div class="icon icon-comment"></div>
-            <div class="icon icon-share"></div>
-        </div>
-
-        <div class="caption-container">
-            <span class="caption-username">Team_Official_Page</span>
-            <span id="caption-text"></span>
-        </div>
-    </div>
-
-    <div id="error-msg"></div>
-
-    <script>
-        // =========================================================
-        // بخش ۱: شماره گروه (فقط این عدد را برای هر فایل عوض کنید)
-        // =========================================================
-        
-        var GROUP_ID = 1; 
-
-        // =========================================================
-        // بخش ۲: لینک‌های شما (من همه را وارد کرده‌ام - دست نزنید)
-        // =========================================================
-        
-        var ALL_LINKS = {
-            1: "https://survey.porsline.ir/s/97Ze9HGF?qs=R1VBWY60FHjie9l",
-        };
-
-        // =========================================================
-        // بخش ۳: دیتابیس متن و عکس (دست نزنید)
-        // =========================================================
-        var database = {
-            1:  { img: "shirt.jpg", txt: "پیراهن جدید فصل با طراحی منحصر به فرد. این پیراهن افتخار را به شما هدیه می‌دهد." },
-            2:  { img: "shirt.jpg", txt: "👕 جدید فصل با طراحی منحصر به فرد. این 👕 افتخار را به شما هدیه می‌دهد." },
-            3:  { img: "shirt.jpg", txt: "پیراهن جدید فصل با طراحی منحصر به فرد. این پیراهن افتخار را به شما هدیه می‌دهد. ✨" },
-            4:  { img: "shirt.jpg", txt: "🆕 👕 فصل با طراحی منحصر به فرد ✨ همین حالا به جمع ما بپیوندید 👇" },
-            
-            5:  { img: "cap.jpg", txt: "کلاه جدید تیم با طرح باشگاه. هر روز صبح را با تیم خود شروع کنید." },
-            6:  { img: "cap.jpg", txt: "🧢 جدید تیم با طرح باشگاه. هر روز صبح را با تیم خود شروع کنید." },
-            7:  { img: "cap.jpg", txt: "کلاه جدید تیم با طرح باشگاه. هر روز صبح را با تیم خود شروع کنید. ☀️" },
-            8:  { img: "cap.jpg", txt: "🆕 🧢 تیم با طرح باشگاه ☀️ همین حالا سفارش دهید 👇" },
-
-            9:  { img: "shirt.jpg", txt: "پیراهن جدید فصل با طراحی منحصر به فرد. این پیراهن افتخار را به شما هدیه می‌دهد." },
-            10: { img: "shirt.jpg", txt: "👕 جدید فصل با طراحی منحصر به فرد. این 👕 افتخار را به شما هدیه می‌دهد." },
-            11: { img: "shirt.jpg", txt: "پیراهن جدید فصل با طراحی منحصر به فرد. این پیراهن افتخار را به شما هدیه می‌دهد. ✨" },
-            12: { img: "shirt.jpg", txt: "🆕 👕 فصل با طراحی منحصر به فرد ✨ همین حالا به جمع ما بپیوندید 👇" },
-
-            13: { img: "cap.jpg", txt: "کلاه جدید تیم با طرح باشگاه. هر روز صبح را با تیم خود شروع کنید." },
-            14: { img: "cap.jpg", txt: "🧢 جدید تیم با طرح باشگاه. هر روز صبح را با تیم خود شروع کنید." },
-            15: { img: "cap.jpg", txt: "کلاه جدید تیم با طرح باشگاه. هر روز صبح را با تیم خود شروع کنید. ☀️" },
-            16: { img: "cap.jpg", txt: "🆕 🧢 تیم با طرح باشگاه ☀️ همین حالا سفارش دهید 👇" }
-        };
-
-        // تابع اصلی اجرای برنامه
-        function startExperiment() {
-            try {
-                var data = database[GROUP_ID];
-                if (!data) { alert("خطا: گروه " + GROUP_ID + " پیدا نشد."); return; }
-
-                document.getElementById('intro-box').style.display = 'none';
-                document.getElementById('post-container').style.display = 'block';
-                document.getElementById('timer-bar').style.display = 'block';
-
-                var imgElement = document.getElementById('product-img');
-                imgElement.src = data.img;
-                imgElement.onerror = function() { logError("تصویر " + data.img + " یافت نشد."); };
-                
-                document.getElementById('caption-text').innerText = data.txt;
-
-                var seconds = 30;
-                var timerDisplay = document.getElementById('time-left');
-                var timerBar = document.getElementById('timer-bar');
-
-                var interval = setInterval(function() {
-                    seconds--;
-                    timerDisplay.innerText = seconds;
-                    if (seconds <= 5) timerBar.classList.add('timer-red');
-                    if (seconds <= 0) {
-                        clearInterval(interval);
-                        finishExperiment();
-                    }
-                }, 1000);
-            } catch (err) { logError(err.message); }
-        }
-
-        // تابع پایان و هدایت به لینک
-        function finishExperiment() {
-            document.body.innerHTML = '<div style="text-align:center; padding:50px;"><h2>زمان تمام شد.</h2><p>در حال انتقال به پرسشنامه...</p></div>';
-            
-            // انتخاب لینک مناسب از لیست
-            var targetLink = ALL_LINKS[GROUP_ID];
-            
-            setTimeout(function() {
-                if(targetLink) {
-                    window.location.href = targetLink;
-                } else {
-                    alert("لینک پرسشنامه برای گروه " + GROUP_ID + " در کد تعریف نشده است!");
-                }
-            }, 1500);
-        }
-
-        function logError(msg) {
-            var errBox = document.getElementById('error-msg');
-            errBox.style.display = 'block';
-            errBox.innerHTML += "ERROR: " + msg + "<br>";
-            document.getElementById('intro-box').style.display = 'block';
-            document.getElementById('post-container').style.display = 'none';
-        }
-
-        window.onerror = function(message) { logError("System Error: " + message); };
-
-    </script>
-</body>
-</html>
-
+        .username { font-weight: 600; font-size: 14px; color: #262626; text-align: right;
