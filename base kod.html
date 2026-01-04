@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>شبیه‌ساز پست اینستاگرام</title>
+    <style>
+        /* استایل‌های عمومی */
+        body { margin: 0; padding: 0; background-color: #fafafa; font-family: Tahoma, 'Segoe UI', Arial, sans-serif; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh; }
+        
+        /* باکس شروع */
+        #intro-box { background: white; padding: 30px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); max-width: 400px; text-align: center; border: 1px solid #dbdbdb; z-index: 10;}
+        #intro-box h2 { color: #262626; margin-top: 0; font-size: 18px; }
+        #intro-box p { color: #8e8e8e; line-height: 1.6; text-align: justify; font-size: 14px; margin-bottom: 20px;}
+        
+        /* دکمه */
+        .btn { background-color: #0095f6; color: white; border: none; padding: 10px 20px; border-radius: 4px; font-size: 14px; font-weight: bold; cursor: pointer; width: 100%; transition: background 0.2s; }
+        .btn:hover { background-color: #0081d6; }
+        .btn:active { opacity: 0.7; }
+
+        /* پست اینستاگرام */
+        #post-container { display: none; background: white; border: 1px solid #dbdbdb; max-width: 400px; width: 100%; border-radius: 3px; margin-top: 50px; }
+        .header { display: flex; align-items: center; padding: 14px; border-bottom: 1px solid #efefef; }
+        .avatar { width: 32px; height: 32px; background-color: #efefef; border-radius: 50%; border: 1px solid #dbdbdb; margin-left: 10px; flex-shrink: 0; }
+        .username { font-weight: 600; font-size: 14px; color: #262626; text-align: right; width: 100%; }
+        
+        /* تصویر محصول */
+        #product-img { width: 100%; display: block; object-fit: cover; min-height: 300px; background: #fafafa; }
+        
+        /* آیکون‌ها */
+        .actions { padding: 10px 14px; display: flex; gap: 16px; direction: ltr; } /* آیکون‌ها چپ‌چین مثل اینستاگرام */
+        .icon { width: 24px; height: 24px; display: block; background-size: contain; background-repeat: no-repeat; cursor: pointer; }
+        .icon-heart { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23262626' stroke-width='2'%3E%3Cpath d='M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z'%3E%3C/path%3E%3C/svg%3E"); }
+        .icon-comment { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23262626' stroke-width='2'%3E%3Cpath d='M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z'%3E%3C/path%3E%3C/svg%3E"); transform: rotateY(180deg); }
+        .icon-share { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23262626' stroke-width='2'%3E%3Cline x1='22' y1='2' x2='11' y2='13'%3E%3C/line%3E%3Cpolygon points='22 2 15 22 11 13 2 9 22 2'%3E%3C/polygon%3E%3C/svg%3E"); }
+
+        /* کپشن */
+        .caption-container { padding: 0 14px 20px 14px; font-size: 14px; line-height: 1.5; color: #262626; text-align: right; }
+        .caption-username { font-weight: 600; margin-left: 5px; }
+        #caption-text { white-space: pre-wrap; } /* حفظ فاصله‌ها و خطوط */
+
+        /* تایمر */
+        #timer-bar { position: fixed; top: 0; left: 0; width: 100%; background: #262626; color: white; padding: 12px; text-align: center; font-weight: bold; font-size: 16px; display: none; z-index: 100; box-shadow: 0 2px 5px rgba(0,0,0,0.2); }
+        .timer-red { background-color: #ed4956 !important; }
+
+        /* پیام خطا */
+        #error-msg { position: fixed; bottom: 10px; left: 10px; right: 10px; background: #ffebee; color: #c62828; border: 1px solid #ef9a9a; padding: 15px; border-radius: 5px; display: none; direction: ltr; font-family: monospace; z-index: 2000; font-size: 12px; }
+    </style>
+</head>
+<body>
+
+    <!-- تایمر بالای صفحه -->
+    <div id="timer-bar">زمان باقی‌مانده: <span id="time-left">30</span> ثانیه</div>
+
+    <!-- صفحه اول: دستورالعمل -->
+    <div id="intro-box">
+        <h2>👋 هوادار عزیز</h2>
+        <p>
+            با سلام و سپاس از مشارکت شما. در ادامه، یک پست از صفحه اینستاگرام یک تیم ورزشی را مشاهده خواهید کرد.
+            <br><br>
+            لطفاً آن را همانند زمانی که در شبکه‌های اجتماعی به محتوا نگاه می‌کنید، <b>با دقت ببینید.</b>
+            <br><br>
+            پس از <b>۳۰ ثانیه</b> مشاهده، به صورت خودکار به صفحه سوالات هدایت می‌شوید.
+        </p>
+        <!-- دکمه‌ای که تابع startExperiment را صدا می‌زند -->
+        <button class="btn" onclick="startExperiment()">مشاهده پست</button>
+    </div>
+
+    <!-- صفحه دوم: پست اینستاگرام -->
+    <div id="post-container">
+        <div class="header">
+            <div class="avatar"></div> <!-- جای آواتار خالی -->
+            <div class="username">Team_Official_Page</div>
+        </div>
+        
+        <img id="product-img" src="" alt="Post Image">
+
+        <div class="actions">
+            <div class="icon icon-heart"></div>
+            <div class="icon icon-comment"></div>
+            <div class="icon icon-share"></div>
+        </div>
+
+        <div class="caption-container">
+            <span class="caption-username">Team_Official_Page</span>
+            <span id="caption-text"></span>
+        </div>
+    </div>
+
+    <!-- کادر خطا برای عیب‌یابی -->
+    <div id="error-msg"></div>
+
+    <script>
+        // ===========================================
+        // فقط عدد زیر را برای هر فایل تغییر دهید
+        // ===========================================
+        
+        var GROUP_ID = 16;
+
+        // ===========================================
+        // تنظیمات دیگر (دست نزنید)
+        // ===========================================
+        var BASE_URL = "https://survey.porsline.ir/s/YOUR_LINK?id="; // لینک پرسشنامه
+
+        // دیتابیس کامل متن‌ها و عکس‌ها (از قبل تنظیم شده)
+        var database = {
+            // --- پیراهن (درگیری بالا) ---
+            1:  { img: "shirt.jpg", txt: "پیراهن جدید فصل با طراحی منحصر به فرد. این پیراهن افتخار را به شما هدیه می‌دهد." },
+            2:  { img: "shirt.jpg", txt: "👕 جدید فصل با طراحی منحصر به فرد. این 👕 افتخار را به شما هدیه می‌دهد." },
+            3:  { img: "shirt.jpg", txt: "پیراهن جدید فصل با طراحی منحصر به فرد. این پیراهن افتخار را به شما هدیه می‌دهد. ✨" },
+            4:  { img: "shirt.jpg", txt: "🆕 👕 فصل با طراحی منحصر به فرد ✨ همین حالا به جمع ما بپیوندید 👇" },
+            
+            // --- کلاه (درگیری پایین) ---
+            5:  { img: "cap.jpg", txt: "کلاه جدید تیم با طرح باشگاه. هر روز صبح را با تیم خود شروع کنید." },
+            6:  { img: "cap.jpg", txt: "🧢 جدید تیم با طرح باشگاه. هر روز صبح را با تیم خود شروع کنید." },
+            7:  { img: "cap.jpg", txt: "کلاه جدید تیم با طرح باشگاه. هر روز صبح را با تیم خود شروع کنید. ☀️" },
+            8:  { img: "cap.jpg", txt: "🆕 🧢 تیم با طرح باشگاه ☀️ همین حالا سفارش دهید 👇" },
+
+            // --- تکرار برای گروه‌های 9 تا 16 (محتوا تکرار می‌شود) ---
+            9:  { img: "shirt.jpg", txt: "پیراهن جدید فصل با طراحی منحصر به فرد. این پیراهن افتخار را به شما هدیه می‌دهد." },
+            10: { img: "shirt.jpg", txt: "👕 جدید فصل با طراحی منحصر به فرد. این 👕 افتخار را به شما هدیه می‌دهد." },
+            11: { img: "shirt.jpg", txt: "پیراهن جدید فصل با طراحی منحصر به فرد. این پیراهن افتخار را به شما هدیه می‌دهد. ✨" },
+            12: { img: "shirt.jpg", txt: "🆕 👕 فصل با طراحی منحصر به فرد ✨ همین حالا به جمع ما بپیوندید 👇" },
+
+            13: { img: "cap.jpg", txt: "کلاه جدید تیم با طرح باشگاه. هر روز صبح را با تیم خود شروع کنید." },
+            14: { img: "cap.jpg", txt: "🧢 جدید تیم با طرح باشگاه. هر روز صبح را با تیم خود شروع کنید." },
+            15: { img: "cap.jpg", txt: "کلاه جدید تیم با طرح باشگاه. هر روز صبح را با تیم خود شروع کنید. ☀️" },
+            16: { img: "cap.jpg", txt: "🆕 🧢 تیم با طرح باشگاه ☀️ همین حالا سفارش دهید 👇" }
+        };
+
+        // تابع اصلی اجرای برنامه
+        function startExperiment() {
+            try {
+                // 1. بررسی وجود داده برای گروه
+                var data = database[GROUP_ID];
+                if (!data) {
+                    alert("خطا: شماره گروه " + GROUP_ID + " تعریف نشده است.");
+                    return;
+                }
+
+                // 2. تغییر ظاهر صفحه
+                document.getElementById('intro-box').style.display = 'none';
+                document.getElementById('post-container').style.display = 'block';
+                document.getElementById('timer-bar').style.display = 'block';
+
+                // 3. لود کردن عکس و متن
+                var imgElement = document.getElementById('product-img');
+                imgElement.src = data.img;
+                imgElement.onerror = function() {
+                    logError("تصویر '" + data.img + "' پیدا نشد! فایل عکس باید کنار فایل HTML باشد.");
+                };
+                
+                document.getElementById('caption-text').innerText = data.txt;
+
+                // 4. شروع تایمر
+                var seconds = 30;
+                var timerDisplay = document.getElementById('time-left');
+                var timerBar = document.getElementById('timer-bar');
+
+                var interval = setInterval(function() {
+                    seconds--;
+                    timerDisplay.innerText = seconds;
+
+                    // قرمز کردن تایمر در 5 ثانیه آخر
+                    if (seconds <= 5) {
+                        timerBar.classList.add('timer-red');
+                    }
+
+                    // پایان زمان
+                    if (seconds <= 0) {
+                        clearInterval(interval);
+                        finishExperiment();
+                    }
+                }, 1000);
+
+            } catch (err) {
+                logError(err.message);
+            }
+        }
+
+        // تابع پایان و هدایت به پرسشنامه
+        function finishExperiment() {
+            document.body.innerHTML = '<div style="text-align:center; padding:50px;"><h2>زمان تمام شد.</h2><p>در حال انتقال به پرسشنامه...</p></div>';
+            setTimeout(function() {
+                window.location.href = BASE_URL + GROUP_ID;
+            }, 1500);
+        }
+
+        // تابع نمایش خطا (اگر مشکلی باشد پایین صفحه قرمز می‌شود)
+        function logError(msg) {
+            var errBox = document.getElementById('error-msg');
+            errBox.style.display = 'block';
+            errBox.innerHTML += "ERROR: " + msg + "<br>";
+            // نمایش دوباره دکمه شروع تا کاربر گیر نکند
+            document.getElementById('intro-box').style.display = 'block';
+            document.getElementById('post-container').style.display = 'none';
+        }
+
+        // یک لایه محافظتی اضافه برای خطاهای کلی
+        window.onerror = function(message, source, lineno, colno, error) {
+            logError("System Error: " + message);
+        };
+
+    </script>
+</body>
+</html>
