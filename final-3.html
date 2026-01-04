@@ -10,17 +10,56 @@
     <meta property="og:type" content="website">
     <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/dist/font-face.css" rel="stylesheet" type="text/css" />
     <style>
-        body { margin: 0; padding: 0; font-family: 'Vazirmatn', sans-serif; background: #fafafa; min-height: 100vh; overflow: hidden; /* ابتدا اسکرول بسته است */ }
+        /* تنظیمات پایه */
+        body { margin: 0; padding: 0; font-family: 'Vazirmatn', sans-serif; background: #fafafa; min-height: 100vh; }
         
-        /* استایل مرکزی برای بادی */
+        /* کانتینر اصلی */
         .container-center { display: flex; justify-content: center; padding-top: 60px; padding-bottom: 40px; }
 
-        #welcome-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 9999; display: flex; justify-content: center; align-items: center; padding: 20px; box-sizing: border-box; transition: opacity 0.5s ease; }
-        .welcome-box { background: white; padding: 30px; border-radius: 15px; max-width: 450px; width: 100%; text-align: center; box-shadow: 0 10px 25px rgba(0,0,0,0.2); border: 1px solid #ddd; }
-        .welcome-box h1 { margin-top: 0; font-size: 1.4rem; color: #333; margin-bottom: 15px; }
-        .welcome-box p { line-height: 1.8; color: #555; font-size: 0.95rem; margin-bottom: 25px; text-align: justify; }
-        .btn-start { background: #0095f6; color: white; border: none; padding: 12px 35px; font-size: 1rem; border-radius: 8px; cursor: pointer; font-family: inherit; font-weight: bold; transition: background 0.2s; }
-        .btn-start:hover { background: #0074cc; }
+        /* صفحه خوش‌آمدگویی - طراحی شده برای پوشش کامل و قطعی */
+        #welcome-overlay { 
+            position: fixed; 
+            top: 0; 
+            left: 0; 
+            width: 100%; 
+            height: 100%; 
+            background: rgba(0,0,0,0.95); 
+            z-index: 2147483647; /* بالاترین لایه ممکن */
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            padding: 20px; 
+            box-sizing: border-box; 
+        }
+
+        .welcome-box { 
+            background: white; 
+            padding: 25px; 
+            border-radius: 12px; 
+            max-width: 400px; 
+            width: 100%; 
+            text-align: center; 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5); 
+        }
+        
+        .welcome-box h1 { margin-top: 0; font-size: 1.3rem; color: #333; margin-bottom: 15px; }
+        .welcome-box p { line-height: 1.7; color: #444; font-size: 0.9rem; margin-bottom: 25px; text-align: justify; }
+        
+        /* دکمه شروع با ناحیه لمس بزرگتر */
+        .btn-start { 
+            background: #0095f6; 
+            color: white; 
+            border: none; 
+            padding: 15px 40px; /* دکمه بزرگتر برای تاچ راحت‌تر */
+            font-size: 1.1rem; 
+            border-radius: 8px; 
+            cursor: pointer; 
+            font-family: inherit; 
+            font-weight: bold; 
+            width: 100%; /* دکمه تمام عرض */
+            display: block;
+        }
+        .btn-start:active { background: #0074cc; transform: scale(0.98); }
 
         /* کارت اینستاگرام */
         .instagram-card { background: white; border: 1px solid #dbdbdb; width: 100%; max-width: 420px; display: none; flex-direction: column; border-radius: 3px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); margin: 0 auto; }
@@ -33,7 +72,7 @@
         .caption .user { font-weight: 600; margin-left: 5px; }
 
         /* تایمر */
-        #timer-bar { position: fixed; top: 0; left: 0; height: 5px; background: #0095f6; width: 100%; z-index: 1000; display: none; transition: width 1s linear; }
+        #timer-bar { position: fixed; top: 0; left: 0; height: 5px; background: #0095f6; width: 0%; z-index: 1000; display: none; }
         #timer-msg { position: fixed; top: 10px; left: 50%; transform: translateX(-50%); background: rgba(0,0,0,0.7); color: white; padding: 5px 15px; border-radius: 20px; font-size: 12px; z-index: 1001; display: none; }
     </style>
 </head>
@@ -44,7 +83,8 @@
         <div class="welcome-box">
             <h1>👋 هوادار عزیز</h1>
             <p>با سلام و سپاس از مشارکت شما. در ادامه، یک پست از صفحه اینستاگرام یک تیم ورزشی را مشاهده خواهید کرد.<br><br>لطفاً آن را همانند زمانی که در شبکه‌های اجتماعی به محتوا نگاه می‌کنید، با دقت ببینید.<br><br>پس از ۳۰ ثانیه مشاهده، به صورت خودکار به صفحه سوالات هدایت می‌شوید.</p>
-            <button class="btn-start" onclick="startTest()">مشاهده پست</button>
+            <!-- اضافه کردن ontouchstart برای واکنش سریع‌تر در موبایل -->
+            <button class="btn-start" onclick="startTest()" ontouchstart="startTest()">مشاهده پست</button>
         </div>
     </div>
 
@@ -74,13 +114,10 @@
 
     <script>
         // ==========================================
-        //  تنظیمات گروه ۳ (پیراهن + ایموجی تکمیل‌کننده ✨)
+        //  تنظیمات گروه ۳ (اصلاح شده و نهایی)
         // ==========================================
-        
         const GROUP_ID = 3; 
         const PRODUCT_IMG = "shirt.jpg"; 
-        
-        // لینک پرس‌لاین متصل به گروه ۳
         const SURVEY_LINK = "https://survey.porsline.ir/s/97Ze9HGF?qs=M1VBWY62tujie9n"; 
 
         const allCaptions = {
@@ -102,31 +139,33 @@
             16: "🆕 🧢 تیم با طرح باشگاه ☀️ همین حالا سفارش دهید 👇"
         };
 
-        // اعمال تنظیمات اولیه
+        // اعمال تنظیمات
         document.getElementById('caption-text').innerText = allCaptions[GROUP_ID];
         document.getElementById('main-image').src = PRODUCT_IMG;
         document.querySelector('meta[property="og:image"]').setAttribute("content", "https://sardarmohammadii-create.github.io/sport-research/" + PRODUCT_IMG);
 
+        // متغیر برای جلوگیری از اجرای چندباره
+        let isStarted = false;
+
         function startTest() {
-            // محو کردن لایه خوش‌آمدگویی
-            const overlay = document.getElementById('welcome-overlay');
-            overlay.style.opacity = '0';
+            if (isStarted) return;
+            isStarted = true;
+
+            // حذف فوری و بدون انیمیشن صفحه خوش‌آمدگویی
+            // استفاده از important برای اطمینان از اعمال
+            document.getElementById('welcome-overlay').style.setProperty('display', 'none', 'important');
             
-            // باز کردن قفل اسکرول بادی
+            // باز کردن اسکرول (احتیاطی)
             document.body.style.overflow = 'auto';
 
-            setTimeout(() => {
-                overlay.style.display = 'none'; // حذف کامل لایه از صفحه
-                
-                // نمایش کارت پست
-                document.getElementById('post-card').style.display = 'flex';
-                
-                // نمایش تایمر
-                document.getElementById('timer-bar').style.display = 'block';
-                document.getElementById('timer-msg').style.display = 'block';
-                
-                runTimer();
-            }, 500);
+            // نمایش پست
+            document.getElementById('post-card').style.display = 'flex';
+            
+            // نمایش و شروع تایمر
+            document.getElementById('timer-bar').style.display = 'block';
+            document.getElementById('timer-msg').style.display = 'block';
+            
+            runTimer();
         }
 
         function runTimer() {
@@ -134,17 +173,16 @@
             const bar = document.getElementById('timer-bar');
             const txt = document.getElementById('time-left');
             
-            // شروع پر شدن نوار تایمر
-            bar.style.width = "100%"; // ابتدا پر باشد یا برعکس، اینجا منطق کاهش عرض را داریم:
-            // برای کاهش عرض:
+            // منطق پر شدن نوار: از ۰ به ۱۰۰
+            let width = 0;
             bar.style.width = "0%";
             
             const interval = setInterval(() => {
                 time--;
                 txt.textContent = time;
-                // محاسبه درصد برای نوار پیشرفت (پر شدن تدریجی)
-                const percentage = ((30 - time) / 30) * 100;
-                bar.style.width = percentage + "%";
+                
+                width = ((30 - time) / 30) * 100;
+                bar.style.width = width + "%";
                 
                 if (time <= 0) {
                     clearInterval(interval);
