@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>پژوهش رفتار مصرف‌کننده ورزشی</title>
+    
+    <!-- ========================================================================= -->
+    <!--  مهم: برای نمایش صحیح عکس در واتس‌اپ، خط زیر را دستی تنظیم کنید           -->
+    <!--  اگر گروه کلاه است: content=".../cap.jpg"                                -->
+    <!--  اگر گروه پیراهن است: content=".../shirt.jpg"                            -->
+    <!-- ========================================================================= -->
+    <meta property="og:image" content="https://sardarmohammadii-create.github.io/sport-research/shirt.jpg">
+    
+    <meta property="og:title" content="پژوهش رفتار هواداری">
+    <meta property="og:description" content="لطفاً ۳۰ ثانیه برای شرکت در این پژوهش زمان بگذارید.">
+    <meta property="og:type" content="website">
+    
+    <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/dist/font-face.css" rel="stylesheet" type="text/css" />
+    <style>
+        body { margin: 0; padding: 0; font-family: 'Vazirmatn', sans-serif; background: #fafafa; min-height: 100vh; }
+        .container-center { display: flex; justify-content: center; padding-top: 60px; padding-bottom: 40px; }
+        
+        /* استایل‌های صفحه خوش‌آمدگویی و کارت */
+        #welcome-overlay { 
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
+            background: rgba(0,0,0,0.95); z-index: 2147483647; 
+            display: flex; justify-content: center; align-items: center; 
+            padding: 20px; box-sizing: border-box; 
+        }
+        .welcome-box { 
+            background: white; padding: 25px; border-radius: 12px; 
+            max-width: 400px; width: 100%; text-align: center; 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5); 
+        }
+        .welcome-box h1 { margin-top: 0; font-size: 1.3rem; color: #333; margin-bottom: 15px; }
+        .welcome-box p { line-height: 1.7; color: #444; font-size: 0.9rem; margin-bottom: 25px; text-align: justify; }
+        
+        .btn-start { 
+            background: #0095f6; color: white; border: none; padding: 15px 40px; 
+            font-size: 1.1rem; border-radius: 8px; cursor: pointer; 
+            font-family: inherit; font-weight: bold; width: 100%; display: block;
+        }
+        .btn-start:active { background: #0074cc; transform: scale(0.98); }
+
+        .instagram-card { 
+            background: white; border: 1px solid #dbdbdb; width: 100%; 
+            max-width: 420px; display: none; flex-direction: column; 
+            border-radius: 3px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); margin: 0 auto; 
+        }
+        .header { display: flex; align-items: center; padding: 14px; border-bottom: 1px solid #efefef; }
+        .avatar { width: 32px; height: 32px; background: #efefef; border-radius: 50%; margin-left: 10px; }
+        .username { font-weight: 600; font-size: 14px; flex-grow: 1; text-align: right; color: #262626; }
+        .post-img { width: 100%; height: auto; display: block; }
+        .actions { padding: 10px 14px; display: flex; gap: 15px; }
+        .caption { padding: 0 14px 14px; font-size: 14px; line-height: 1.6; text-align: right; direction: rtl; color: #262626; }
+        .caption .user { font-weight: 600; margin-left: 5px; }
+
+        #timer-bar { position: fixed; top: 0; left: 0; height: 5px; background: #0095f6; width: 0%; z-index: 1000; display: none; }
+        #timer-msg { position: fixed; top: 10px; left: 50%; transform: translateX(-50%); background: rgba(0,0,0,0.7); color: white; padding: 5px 15px; border-radius: 20px; font-size: 12px; z-index: 1001; display: none; }
+    </style>
+</head>
+<body>
+
+    <div id="welcome-overlay">
+        <div class="welcome-box">
+            <h1>👋 هوادار عزیز</h1>
+            <p>با سلام و سپاس از مشارکت شما. در ادامه، یک پست از صفحه اینستاگرام یک تیم ورزشی را مشاهده خواهید کرد.<br><br>لطفاً آن را همانند زمانی که در شبکه‌های اجتماعی به محتوا نگاه می‌کنید، با دقت ببینید.<br><br>پس از ۳۰ ثانیه مشاهده، به صورت خودکار به صفحه سوالات هدایت می‌شوید.</p>
+            <button class="btn-start" onclick="startTest()" ontouchstart="startTest()">مشاهده پست</button>
+        </div>
+    </div>
+
+    <div id="timer-bar"></div>
+    <div id="timer-msg">زمان باقی‌مانده: <span id="time-left">30</span> ثانیه</div>
+
+    <div class="container-center">
+        <div class="instagram-card" id="post-card">
+            <div class="header">
+                <div class="avatar"></div>
+                <div class="username">Team_Official</div>
+            </div>
+            <!-- عکس به صورت خودکار توسط JS پر می‌شود -->
+            <img id="main-image" src="" class="post-img" alt="Product">
+            <div class="actions">
+                <svg aria-label="Like" height="24" viewBox="0 0 24 24" width="24"><path d="M16.792 3.904A4.989 4.989 0 0 1 21.5 9.122c0 3.072-2.652 4.956-5.197 7.222-2.512 2.243-3.865 3.469-4.303 3.752-.477-.309-2.143-1.823-4.303-3.752C5.141 14.072 2.5 12.167 2.5 9.122a4.989 4.989 0 0 1 4.708-5.218 4.21 4.21 0 0 1 3.675 1.941c.84 1.175.98 1.763 1.12 1.763s.278-.588 1.11-1.766a4.17 4.17 0 0 1 3.679-1.938m0-2a6.04 6.04 0 0 0-4.797 2.127 6.052 6.052 0 0 0-4.787-2.127A6.985 6.985 0 0 0 .5 9.122c0 3.61 2.55 5.827 5.015 7.97.283.246.569.494.853.747l1.027.918a44.998 44.998 0 0 0 3.518 3.018 2 2 0 0 0 2.174 0 45.263 45.263 0 0 0 3.626-3.115l.922-.824c.293-.26.59-.519.885-.774 2.334-2.025 4.98-4.32 4.98-7.94a6.985 6.985 0 0 0-6.708-7.218Z" fill="#262626"></path></svg>
+                <svg aria-label="Comment" height="24" viewBox="0 0 24 24" width="24"><path d="M20.656 17.008a9.993 9.993 0 1 0-3.59 3.615L22 22Z" fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="2"></path></svg>
+                <svg aria-label="Share" height="24" viewBox="0 0 24 24" width="24"><line fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="2" x1="22" x2="9.218" y1="3" y2="10.083"></line><polygon fill="none" points="11.698 20.334 22 3.001 2 3.001 9.218 10.084 11.698 20.334" stroke="currentColor" stroke-linejoin="round" stroke-width="2"></polygon></svg>
+            </div>
+            <div class="caption">
+                <span class="user">Team_Official</span>
+                <span id="caption-text"></span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ==========================================
+        //  ⛔️ فقط و فقط این ۲ خط زیر را تغییر دهید ⛔️
+        // ==========================================
+        
+        const GROUP_ID = 1;           // شماره گروه را اینجا بنویسید (از ۴ تا ۱۶)
+        const PRODUCT_IMG = "shirt.jpg"; // نام عکس را دقیق بنویسید: "shirt.jpg" یا "cap.jpg"
+
+        // ==========================================
+        
+        // لیست کامل لینک‌های پرسشنامه شما
+        const allLinks = {
+1: "https://survey.porsline.ir/s/97Ze9HGF?qs=R1VBWY60FHjie9l",
+        };
+
+        // لیست کامل کپشن‌ها (بر اساس فایل ورد پژوهش شما)
+        const allCaptions = {
+            1: "پیراهن جدید فصل با طراحی منحصر به فرد. این پیراهن افتخار را به شما هدیه می‌دهد.",
+            2: "👕 جدید فصل با طراحی منحصر به فرد. این 👕 افتخار را به شما هدیه می‌دهد.",
+            3: "پیراهن جدید فصل با طراحی منحصر به فرد. این پیراهن افتخار را به شما هدیه می‌دهد. ✨",
+            4: "🆕 👕 فصل با طراحی منحصر به فرد ✨ همین حالا به جمع ما بپیوندید 👇",
+            5: "کلاه جدید تیم با طرح باشگاه. هر روز صبح را با تیم خود شروع کنید.",
+            6: "🧢 جدید تیم با طرح باشگاه. هر روز صبح را با تیم خود شروع کنید.",
+            7: "کلاه جدید تیم با طرح باشگاه. هر روز صبح را با تیم خود شروع کنید. ☀️",
+            8: "🆕 🧢 تیم با طرح باشگاه ☀️ همین حالا سفارش دهید 👇",
+            9: "پیراهن جدید فصل با طراحی منحصر به فرد. این پیراهن افتخار را به شما هدیه می‌دهد. ✨",
+            10: "پیراهن جدید فصل با طراحی منحصر به فرد. این پیراهن افتخار را به شما هدیه می‌دهد. ✨",
+            11: "کلاه جدید تیم با طرح باشگاه. هر روز صبح را با تیم خود شروع کنید. ☀️",
+            12: "کلاه جدید تیم با طرح باشگاه. هر روز صبح را با تیم خود شروع کنید. ☀️",
+            13: "🆕 👕 فصل با طراحی منحصر به فرد ✨ همین حالا به جمع ما بپیوندید 👇",
+            14: "🆕 👕 فصل با طراحی منحصر به فرد ✨ همین حالا به جمع ما بپیوندید 👇",
+            15: "🆕 🧢 تیم با طرح باشگاه ☀️ همین حالا سفارش دهید 👇",
+            16: "🆕 🧢 تیم با طرح باشگاه ☀️ همین حالا سفارش دهید 👇"
+        };
+
+        // اجرای خودکار تنظیمات
+        document.getElementById('caption-text').innerText = allCaptions[GROUP_ID];
+        document.getElementById('main-image').src = PRODUCT_IMG;
+        
+        // لاجیک شروع و تایمر
+        let isStarted = false;
+        function startTest() {
+            if (isStarted) return;
+            isStarted = true;
+            document.getElementById('welcome-overlay').style.setProperty('display', 'none', 'important');
+            document.body.style.overflow = 'auto';
+            document.getElementById('post-card').style.display = 'flex';
+            document.getElementById('timer-bar').style.display = 'block';
+            document.getElementById('timer-msg').style.display = 'block';
+            runTimer();
+        }
+
+        function runTimer() {
+            let time = 30;
+            const bar = document.getElementById('timer-bar');
+            const txt = document.getElementById('time-left');
+            let width = 0;
+            bar.style.width = "0%";
+            const interval = setInterval(() => {
+                time--;
+                txt.textContent = time;
+                width = ((30 - time) / 30) * 100;
+                bar.style.width = width + "%";
+                if (time <= 0) {
+                    clearInterval(interval);
+                    window.location.href = allLinks[GROUP_ID];
+                }
+            }, 1000);
+        }
+    </script>
+</body>
+</html>
