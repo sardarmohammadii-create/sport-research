@@ -4,33 +4,245 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <!-- تنظیمات نمایش لینک در شبکه‌های اجتماعی (اصلاح شده و نهایی) -->
-    <meta property="og:title" content="تأثیر راهبردهای ایموجی و سطح درگیری محصول بر اثربخشی تبلیغات ورزشی" />
-    <meta property="og:description" content="با سلام، لطفاً ۳۰ ثانیه زمان بگذارید و در این پژوهش دانشگاهی شرکت کنید. نظر شما ارزشمند است." />
-    <!-- نکته: ?v=2 برای مجبور کردن واتس‌اپ به دانلود مجدد عکس است -->
-    <meta property="og:image" content="https://sardarmohammadii-create.github.io/sport-research/shirt.jpg?v=2" />
-    <meta property="og:url" content="https://sardarmohammadii-create.github.io/sport-research/" />
-    <meta property="og:type" content="article" />
-    <meta property="og:locale" content="fa_IR" />
-    <!-- پایان تنظیمات -->
+    <!-- عنوان دقیق تحقیق برای نمایش در مرورگر و واتس‌اپ -->
+    <title>تأثیر راهبردهای ایموجی و سطح درگیری محصول بر اثربخشی تبلیغات ورزشی</title>
+    
+    <!-- متاتگ‌های مخصوص واتس‌اپ و تلگرام -->
+    <meta property="og:title" content="تأثیر راهبردهای ایموجی و سطح درگیری محصول بر اثربخشی تبلیغات ورزشی">
+    <meta property="og:description" content="لطفاً برای مشاهده محتوای تحقیق کلیک کنید.">
+    <!-- عکس پیراهن برای گروه ۱ (چون محصول درگیری بالا است) -->
+    <meta property="og:image" content="shirt.jpg?v=2">
+    <meta property="og:type" content="website">
 
-    <title>شبیه‌ساز پست اینستاگرام</title>
     <style>
-        /* استایل‌های عمومی */
-        body { margin: 0; padding: 0; background-color: #fafafa; font-family: Tahoma, 'Segoe UI', Arial, sans-serif; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh; }
+        @font-face {
+            font-family: 'IRANSans';
+            src: url('https://cdn.jsdelivr.net/gh/rastikerdar/vazir-font@v30.1.0/dist/Vazir.woff2') format('woff2');
+        }
         
-        /* باکس شروع */
-        #intro-box { background: white; padding: 30px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); max-width: 400px; text-align: center; border: 1px solid #dbdbdb; z-index: 10;}
-        #intro-box h2 { color: #262626; margin-top: 0; font-size: 18px; }
-        #intro-box p { color: #8e8e8e; line-height: 1.6; text-align: justify; font-size: 14px; margin-bottom: 20px;}
-        
-        /* دکمه */
-        .btn { background-color: #0095f6; color: white; border: none; padding: 10px 20px; border-radius: 4px; font-size: 14px; font-weight: bold; cursor: pointer; width: 100%; transition: background 0.2s; }
-        .btn:hover { background-color: #0081d6; }
-        .btn:active { opacity: 0.7; }
+        body {
+            background-color: #fafafa;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            font-family: 'IRANSans', sans-serif;
+        }
 
-        /* پست اینستاگرام */
-        #post-container { display: none; background: white; border: 1px solid #dbdbdb; max-width: 400px; width: 100%; border-radius: 3px; margin-top: 50px; }
-        .header { display: flex; align-items: center; padding: 14px; border-bottom: 1px solid #efefef; }
-        .avatar { width: 32px; height: 32px; background-color: #efefef; border-radius: 50%; border: 1px solid #dbdbdb; margin-left: 10px; flex-shrink: 0; }
-        .username { font-weight: 600; font-size: 14px; color: #262626; text-align: right;
+        .phone-container {
+            width: 100%;
+            max-width: 400px;
+            background: white;
+            border: 1px solid #dbdbdb;
+            border-radius: 3px;
+            position: relative;
+        }
+
+        .header {
+            padding: 14px;
+            border-bottom: 1px solid #efefef;
+            display: flex;
+            align-items: center;
+        }
+
+        .profile-pic {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: #efefef;
+            margin-left: 10px;
+        }
+
+        .username {
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .post-image-container {
+            width: 100%;
+            background: #efefef;
+            /* نسبت تصویر اینستاگرام */
+            aspect-ratio: 4/5; 
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .post-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .action-bar {
+            padding: 10px 14px;
+        }
+
+        .likes {
+            padding: 0 14px;
+            font-weight: 600;
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+
+        .caption {
+            padding: 0 14px 14px 14px;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .caption-username {
+            font-weight: 600;
+            margin-left: 5px;
+        }
+
+        /* استایل تایمر */
+        #timer-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 5px;
+            background-color: #0095f6;
+            width: 100%;
+            transition: width 1s linear;
+            z-index: 9999;
+        }
+        
+        #timer-text {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            background: rgba(0,0,0,0.7);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            z-index: 9999;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="timer-bar"></div>
+    <div id="timer-text">زمان باقی‌مانده: <span id="seconds">30</span> ثانیه</div>
+
+    <div class="phone-container">
+        <!-- هدر پست -->
+        <div class="header">
+            <div class="profile-pic"><img src="1.jpg" style="width:100%; height:100%; border-radius:50%; object-fit:cover;"></div>
+            <div class="username">sport_team_official</div>
+            <div style="margin-right: auto;">...</div>
+        </div>
+
+        <!-- عکس پست -->
+        <div class="post-image-container">
+            <!-- عکس پیش‌فرض برای گروه ۱ پیراهن است -->
+            <img src="shirt.jpg" alt="Product" class="post-image" id="product-img">
+        </div>
+
+        <!-- اکشن بار (لایک و ...) -->
+        <div class="action-bar">
+            <svg aria-label="Like" height="24" role="img" viewBox="0 0 24 24" width="24"><path d="M16.792 3.904A4.989 4.989 0 0 1 21.5 9.122c0 3.072-2.652 4.959-5.197 7.222-2.512 2.243-3.865 3.469-4.303 3.752-.477-.309-2.143-1.823-4.303-3.752C5.141 14.072 2.5 12.167 2.5 9.122a4.989 4.989 0 0 1 4.708-5.218 4.21 4.21 0 0 1 3.675 1.941c.84 1.175.98 1.763 1.12 1.763s.278-.588 1.11-1.766a4.17 4.17 0 0 1 3.68-1.948z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+            <svg aria-label="Comment" height="24" role="img" viewBox="0 0 24 24" width="24" style="margin-right: 15px;"><path d="M20.656 17.008a9.993 9.993 0 1 0-3.59 3.615L22 22z" fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="2"></path></svg>
+            <svg aria-label="Share" height="24" role="img" viewBox="0 0 24 24" width="24" style="margin-right: 15px;"><line fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="2" x1="22" x2="9.218" y1="3" y2="10.083"></line><polygon fill="none" points="11.698 20.334 22 3.001 2 3.001 9.218 10.084 11.698 20.334" stroke="currentColor" stroke-linejoin="round" stroke-width="2"></polygon></svg>
+            <svg aria-label="Save" height="24" role="img" viewBox="0 0 24 24" width="24" style="margin-right: auto;"><polygon fill="none" points="20 21 12 13.44 4 21 4 3 20 3 20 21" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></polygon></svg>
+        </div>
+
+        <div class="likes">0 likes</div>
+
+        <!-- کپشن پست -->
+        <div class="caption">
+            <span class="username caption-username">sport_team_official</span>
+            <span id="caption-text">
+                <!-- متن توسط جاوا اسکریپت پر می‌شود -->
+            </span>
+        </div>
+    </div>
+
+    <script>
+        // ==========================================
+        // تنظیمات مخصوص گروه ۱ (لطفاً این بخش را ویرایش کنید)
+        // ==========================================
+        
+        // شناسه گروه (برای گروه ۱ عدد ۱ است)
+        var GROUP_ID = 1; 
+
+        // لیست لینک‌ها
+        var ALL_LINKS = {
+            // *** مهم: لینک پرس‌لاین گروه ۱ خود را در خط زیر جایگزین کنید ***
+            1: "https://survey.porsline.ir/s/97Ze9HGF?qs=R1VBWY60FHjie9l",
+        };
+
+        // ==========================================
+        // پایان بخش تنظیمات - بقیه کد را تغییر ندهید
+        // ==========================================
+
+        // دیتابیس متن‌های ۱۶ گروه (از روی فایل ورد شما استخراج شده)
+        var CAPTIONS = {
+            1: "این پیراهن جدید تیم ما برای فصل آینده است. طراحی ارگونومیک آن باعث راحتی بیشتر بازیکنان در زمین می‌شود.",
+            2: "این 👕 جدید تیم ما برای فصل آینده است. طراحی ارگونومیک آن باعث راحتی بیشتر بازیکنان در زمین می‌شود.",
+            3: "این پیراهن جدید تیم ما برای فصل آینده است. طراحی ارگونومیک آن باعث راحتی بیشتر بازیکنان در زمین می‌شود. ✨",
+            4: "این 👕 جدید تیم ما برای فصل آینده است 🆕. طراحی ارگونومیک آن باعث راحتی بیشتر بازیکنان در زمین می‌شود ✨. کیفیت عالی 👇.",
+            5: "این کلاه جدید هواداری برای حمایت از تیم است. لبه‌دوزی مقاوم آن از تابش مستقیم آفتاب جلوگیری می‌کند.",
+            6: "این 🧢 جدید هواداری برای حمایت از تیم است. لبه‌دوزی مقاوم آن از تابش مستقیم ☀️ جلوگیری می‌کند.",
+            7: "این کلاه جدید هواداری برای حمایت از تیم است. لبه‌دوزی مقاوم آن از تابش مستقیم آفتاب جلوگیری می‌کند. ☀️",
+            8: "این 🧢 جدید هواداری برای حمایت از تیم است 🆕. لبه‌دوزی مقاوم آن از تابش مستقیم ☀️ جلوگیری می‌کند ✨. کیفیت عالی 👇.",
+            9: "این پیراهن جدید تیم ما برای فصل آینده است. طراحی ارگونومیک آن باعث راحتی بیشتر بازیکنان در زمین می‌شود.",
+            10: "این 👕 جدید تیم ما برای فصل آینده است. طراحی ارگونومیک آن باعث راحتی بیشتر بازیکنان در زمین می‌شود.",
+            11: "این پیراهن جدید تیم ما برای فصل آینده است. طراحی ارگونومیک آن باعث راحتی بیشتر بازیکنان در زمین می‌شود. ❤️",
+            12: "این کلاه جدید هواداری برای حمایت از تیم است. لبه‌دوزی مقاوم آن از تابش مستقیم آفتاب جلوگیری می‌کند. ☀️",
+            13: "این 👕 جدید تیم ما برای فصل آینده است 🆕. طراحی ارگونومیک آن باعث راحتی بیشتر بازیکنان در زمین می‌شود ✨. کیفیت عالی 👇.",
+            14: "این 👕 جدید تیم ما برای فصل آینده است 🆕. طراحی ارگونومیک آن باعث راحتی بیشتر بازیکنان در زمین می‌شود ✨. کیفیت عالی 👇.",
+            15: "این 🧢 جدید هواداری برای حمایت از تیم است 🆕. لبه‌دوزی مقاوم آن از تابش مستقیم ☀️ جلوگیری می‌کند ✨. کیفیت عالی 👇.",
+            16: "این 🧢 جدید هواداری برای حمایت از تیم است 🆕. لبه‌دوزی مقاوم آن از تابش مستقیم ☀️ جلوگیری می‌کند ✨. کیفیت عالی 👇."
+        };
+
+        // دیتابیس عکس‌ها (کدام گروه چه عکسی دارد)
+        var IMAGES = {
+            1: "shirt.jpg", 2: "shirt.jpg", 3: "shirt.jpg", 4: "shirt.jpg",
+            5: "cap.jpg", 6: "cap.jpg", 7: "cap.jpg", 8: "cap.jpg",
+            9: "shirt.jpg", 10: "shirt.jpg", 11: "shirt.jpg", 12: "cap.jpg", // گروه 12 کلاه است
+            13: "shirt.jpg", 14: "shirt.jpg", 15: "cap.jpg", 16: "cap.jpg"
+        };
+
+        // اعمال محتوا بر اساس شماره گروه
+        document.getElementById('caption-text').innerText = " " + CAPTIONS[GROUP_ID];
+        document.getElementById('product-img').src = IMAGES[GROUP_ID];
+
+        // منطق تایمر و هدایت
+        var timeLeft = 30;
+        var timerElement = document.getElementById('seconds');
+        var timerBar = document.getElementById('timer-bar');
+        
+        var countdown = setInterval(function() {
+            timeLeft--;
+            timerElement.textContent = timeLeft;
+            
+            // آپدیت نوار پیشرفت
+            var percentage = ((30 - timeLeft) / 30) * 100;
+            timerBar.style.width = (100 - percentage) + "%";
+
+            if (timeLeft <= 0) {
+                clearInterval(countdown);
+                redirectUser();
+            }
+        }, 1000);
+
+        function redirectUser() {
+            var targetLink = ALL_LINKS[GROUP_ID];
+            if(targetLink) {
+                // اضافه کردن پارامتر برای ردیابی در پرس‌لاین
+                if (targetLink.indexOf('?') > -1) {
+                    window.location.href = targetLink + "&group_id=" + GROUP_ID;
+                } else {
+                    window.location.href = targetLink + "?group_id=" + GROUP_ID;
+                }
+            } else {
+                alert("خطا: لینک پرسشنامه برای این گروه یافت نشد. لطفاً با مسئول تحقیق تماس بگیرید.");
+            }
+        }
+    </script>
+</body>
+</html>
